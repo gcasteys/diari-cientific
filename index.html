@@ -347,6 +347,13 @@
             <textarea id="t1-hypothesis" rows="3" placeholder="Si plou sobre sòl cremat, l'aigua arrossegarà... perquè..." class="w-full p-2 border rounded bg-white outline-none focus:border-forest-500"></textarea>
           </div>
         </div>
+      
+        <div class="flex items-center gap-3 pt-2 mt-2 border-t border-gray-100">
+          <button onclick="saveFitxaAnswers('t1-fitxa1', 'T1: Gavarres')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
+            💾 Desar aquesta fitxa
+          </button>
+          <span id="t1-fitxa1-save-status" class="text-[11px] text-gray-500"></span>
+        </div>
       </div>
 
       <!-- FITXA 2: Experiment d'Erosió (Canvas Simulator) -->
@@ -394,24 +401,31 @@
             <tbody class="divide-y text-gray-700">
               <tr>
                 <td class="p-2 font-bold">A: Amb vegetació i arrels</td>
-                <td class="p-2"><input type="text" placeholder="Ex: 80 ml" class="p-1 border rounded w-24"></td>
-                <td class="p-2"><input type="text" placeholder="Neta / Clara" class="p-1 border rounded w-28"></td>
-                <td class="p-2"><input type="text" placeholder="Gairebé gens" class="p-1 border rounded w-32"></td>
+                <td class="p-2"><input type="text" id="t1f2-a-aigua" placeholder="Ex: 80 ml" class="p-1 border rounded w-24"></td>
+                <td class="p-2"><input type="text" id="t1f2-a-aspecte" placeholder="Neta / Clara" class="p-1 border rounded w-28"></td>
+                <td class="p-2"><input type="text" id="t1f2-a-terra" placeholder="Gairebé gens" class="p-1 border rounded w-32"></td>
               </tr>
               <tr>
                 <td class="p-2 font-bold">B: Sòl desnudat (Sense plantes)</td>
-                <td class="p-2"><input type="text" placeholder="Ex: 150 ml" class="p-1 border rounded w-24"></td>
-                <td class="p-2"><input type="text" placeholder="Tèrbola / Marró" class="p-1 border rounded w-28"></td>
-                <td class="p-2"><input type="text" placeholder="Mitjana quantitat" class="p-1 border rounded w-32"></td>
+                <td class="p-2"><input type="text" id="t1f2-b-aigua" placeholder="Ex: 150 ml" class="p-1 border rounded w-24"></td>
+                <td class="p-2"><input type="text" id="t1f2-b-aspecte" placeholder="Tèrbola / Marró" class="p-1 border rounded w-28"></td>
+                <td class="p-2"><input type="text" id="t1f2-b-terra" placeholder="Mitjana quantitat" class="p-1 border rounded w-32"></td>
               </tr>
               <tr>
                 <td class="p-2 font-bold text-red-600">C: Cremat amb cendra</td>
-                <td class="p-2"><input type="text" placeholder="Ex: 220 ml" class="p-1 border rounded w-24"></td>
-                <td class="p-2"><input type="text" placeholder="Molt negra / Cendra" class="p-1 border rounded w-28"></td>
-                <td class="p-2"><input type="text" placeholder="Molt alta (Erosió)" class="p-1 border rounded w-32"></td>
+                <td class="p-2"><input type="text" id="t1f2-c-aigua" placeholder="Ex: 220 ml" class="p-1 border rounded w-24"></td>
+                <td class="p-2"><input type="text" id="t1f2-c-aspecte" placeholder="Molt negra / Cendra" class="p-1 border rounded w-28"></td>
+                <td class="p-2"><input type="text" id="t1f2-c-terra" placeholder="Molt alta (Erosió)" class="p-1 border rounded w-32"></td>
               </tr>
             </tbody>
           </table>
+        </div>
+      
+        <div class="flex items-center gap-3 pt-2 mt-2 border-t border-gray-100">
+          <button onclick="saveFitxaAnswers('t1-fitxa2', 'T1: Gavarres')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
+            💾 Desar aquesta fitxa
+          </button>
+          <span id="t1-fitxa2-save-status" class="text-[11px] text-gray-500"></span>
         </div>
       </div>
 
@@ -504,6 +518,13 @@
             </div>
           </div>
         </div>
+      
+        <div class="flex items-center gap-3 pt-2 mt-2 border-t border-gray-100">
+          <button onclick="saveFitxaAnswers('t1-fitxa3', 'T1: Gavarres')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
+            💾 Desar aquesta fitxa
+          </button>
+          <span id="t1-fitxa3-save-status" class="text-[11px] text-gray-500"></span>
+        </div>
       </div>
     </section>
 
@@ -530,10 +551,10 @@
           <div class="space-y-2">
             <label class="font-bold text-gray-800 block">1. Observació de la Posidònia oceanica:</label>
             <p class="text-gray-600">És una àlga o una planta marina? Com ho sabem?</p>
-            <textarea rows="2" placeholder="És una planta marina perquè té arrels, tija, fulles, flors i fruita..." class="w-full p-2 border rounded bg-white outline-none focus:border-ocean-500"></textarea>
+            <textarea id="t2f1-posidonia" rows="2" placeholder="És una planta marina perquè té arrels, tija, fulles, flors i fruita..." class="w-full p-2 border rounded bg-white outline-none focus:border-ocean-500"></textarea>
 
             <p class="text-gray-600 mt-2">Anotacions de l'observació de l'egagròpila (bola de la platja):</p>
-            <textarea rows="2" placeholder="Les boles estan fetes de les fibres de les fulles de Posidònia que el mar enrotlla..." class="w-full p-2 border rounded bg-white outline-none focus:border-ocean-500"></textarea>
+            <textarea id="t2f1-egagropila" rows="2" placeholder="Les boles estan fetes de les fibres de les fulles de Posidònia que el mar enrotlla..." class="w-full p-2 border rounded bg-white outline-none focus:border-ocean-500"></textarea>
           </div>
 
           <!-- Comparació visual -->
@@ -554,6 +575,13 @@
               </div>
             </div>
           </div>
+        </div>
+      
+        <div class="flex items-center gap-3 pt-2 mt-2 border-t border-gray-100">
+          <button onclick="saveFitxaAnswers('t2-fitxa1', 'T2: Posidònia')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
+            💾 Desar aquesta fitxa
+          </button>
+          <span id="t2-fitxa1-save-status" class="text-[11px] text-gray-500"></span>
         </div>
       </div>
 
@@ -611,6 +639,13 @@
             Estat: Algorisme a punt. Prem "Executar Simulació" per provar el codi.
           </div>
         </div>
+      
+        <div class="flex items-center gap-3 pt-2 mt-2 border-t border-gray-100">
+          <button onclick="saveFitxaAnswers('t2-fitxa2', 'T2: Posidònia')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
+            💾 Desar aquesta fitxa
+          </button>
+          <span id="t2-fitxa2-save-status" class="text-[11px] text-gray-500"></span>
+        </div>
       </div>
 
       <!-- FITXA 3: Debugging i Muntatge -->
@@ -636,17 +671,24 @@
                 <td class="p-2"><input type="text" value="Hem baixat la posició del sensor 1 cm" class="w-full p-1 border rounded bg-gray-50"></td>
               </tr>
               <tr>
-                <td class="p-2"><input type="text" placeholder="Error 1 del teu equip..." class="w-full p-1 border rounded"></td>
-                <td class="p-2"><input type="text" placeholder="Causa de l'error..." class="w-full p-1 border rounded"></td>
-                <td class="p-2"><input type="text" placeholder="Solució aplicada..." class="w-full p-1 border rounded"></td>
+                <td class="p-2"><input type="text" id="t2f3-error1-que" placeholder="Error 1 del teu equip..." class="w-full p-1 border rounded"></td>
+                <td class="p-2"><input type="text" id="t2f3-error1-perque" placeholder="Causa de l'error..." class="w-full p-1 border rounded"></td>
+                <td class="p-2"><input type="text" id="t2f3-error1-solucio" placeholder="Solució aplicada..." class="w-full p-1 border rounded"></td>
               </tr>
               <tr>
-                <td class="p-2"><input type="text" placeholder="Error 2 del teu equip..." class="w-full p-1 border rounded"></td>
-                <td class="p-2"><input type="text" placeholder="Causa de l'error..." class="w-full p-1 border rounded"></td>
-                <td class="p-2"><input type="text" placeholder="Solució aplicada..." class="w-full p-1 border rounded"></td>
+                <td class="p-2"><input type="text" id="t2f3-error2-que" placeholder="Error 2 del teu equip..." class="w-full p-1 border rounded"></td>
+                <td class="p-2"><input type="text" id="t2f3-error2-perque" placeholder="Causa de l'error..." class="w-full p-1 border rounded"></td>
+                <td class="p-2"><input type="text" id="t2f3-error2-solucio" placeholder="Solució aplicada..." class="w-full p-1 border rounded"></td>
               </tr>
             </tbody>
           </table>
+        </div>
+      
+        <div class="flex items-center gap-3 pt-2 mt-2 border-t border-gray-100">
+          <button onclick="saveFitxaAnswers('t2-fitxa3', 'T2: Posidònia')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
+            💾 Desar aquesta fitxa
+          </button>
+          <span id="t2-fitxa3-save-status" class="text-[11px] text-gray-500"></span>
         </div>
       </div>
     </section>
@@ -688,27 +730,27 @@
             <tbody class="divide-y text-gray-700">
               <tr>
                 <td class="p-2 font-bold">Flotabilitat (Flota o s'enfonsa?)</td>
-                <td class="p-2"><select class="p-1 border rounded bg-amber-50 w-full"><option>Flota molt bé</option><option>S'enfonsa</option></select></td>
-                <td class="p-2"><select class="p-1 border rounded bg-blue-50 w-full"><option>Flota</option><option>S'enfonsa</option></select></td>
-                <td class="p-2"><select class="p-1 border rounded bg-emerald-50 w-full"><option>S'enfonsa</option><option>Flota</option></select></td>
+                <td class="p-2"><select id="t3f1-flotabilitat-suro" class="p-1 border rounded bg-amber-50 w-full"><option>Flota molt bé</option><option>S'enfonsa</option></select></td>
+                <td class="p-2"><select id="t3f1-flotabilitat-plastic" class="p-1 border rounded bg-blue-50 w-full"><option>Flota</option><option>S'enfonsa</option></select></td>
+                <td class="p-2"><select id="t3f1-flotabilitat-vidre" class="p-1 border rounded bg-emerald-50 w-full"><option>S'enfonsa</option><option>Flota</option></select></td>
               </tr>
               <tr>
                 <td class="p-2 font-bold">Impermeabilitat (Deixa passar aigua?)</td>
-                <td class="p-2"><select class="p-1 border rounded bg-amber-50 w-full"><option>Impermeable (No passsa)</option><option>Permeable</option></select></td>
-                <td class="p-2"><select class="p-1 border rounded bg-blue-50 w-full"><option>Impermeable</option><option>Permeable</option></select></td>
-                <td class="p-2"><select class="p-1 border rounded bg-emerald-50 w-full"><option>Impermeable</option><option>Permeable</option></select></td>
+                <td class="p-2"><select id="t3f1-impermeabilitat-suro" class="p-1 border rounded bg-amber-50 w-full"><option>Impermeable (No passsa)</option><option>Permeable</option></select></td>
+                <td class="p-2"><select id="t3f1-impermeabilitat-plastic" class="p-1 border rounded bg-blue-50 w-full"><option>Impermeable</option><option>Permeable</option></select></td>
+                <td class="p-2"><select id="t3f1-impermeabilitat-vidre" class="p-1 border rounded bg-emerald-50 w-full"><option>Impermeable</option><option>Permeable</option></select></td>
               </tr>
               <tr>
                 <td class="p-2 font-bold">Aïllament Tèrmic (Aïlla calor/fred?)</td>
-                <td class="p-2"><select class="p-1 border rounded bg-amber-50 w-full"><option>Excel·lent aïllant</option><option>Malt aïllant</option></select></td>
-                <td class="p-2"><select class="p-1 border rounded bg-blue-50 w-full"><option>Mitjà</option><option>Bo</option></select></td>
-                <td class="p-2"><select class="p-1 border rounded bg-emerald-50 w-full"><option>Mal aïllant</option><option>Bo</option></select></td>
+                <td class="p-2"><select id="t3f1-aillament-suro" class="p-1 border rounded bg-amber-50 w-full"><option>Excel·lent aïllant</option><option>Malt aïllant</option></select></td>
+                <td class="p-2"><select id="t3f1-aillament-plastic" class="p-1 border rounded bg-blue-50 w-full"><option>Mitjà</option><option>Bo</option></select></td>
+                <td class="p-2"><select id="t3f1-aillament-vidre" class="p-1 border rounded bg-emerald-50 w-full"><option>Mal aïllant</option><option>Bo</option></select></td>
               </tr>
               <tr>
                 <td class="p-2 font-bold">Biodegradabilitat (Natural?)</td>
-                <td class="p-2"><select class="p-1 border rounded bg-amber-50 w-full"><option>Sí (100% Natural)</option><option>No</option></select></td>
-                <td class="p-2"><select class="p-1 border rounded bg-blue-50 w-full"><option>No (Contamina)</option><option>Sí</option></select></td>
-                <td class="p-2"><select class="p-1 border rounded bg-emerald-50 w-full"><option>No (Reciclable)</option><option>Sí</option></select></td>
+                <td class="p-2"><select id="t3f1-biodegradabilitat-suro" class="p-1 border rounded bg-amber-50 w-full"><option>Sí (100% Natural)</option><option>No</option></select></td>
+                <td class="p-2"><select id="t3f1-biodegradabilitat-plastic" class="p-1 border rounded bg-blue-50 w-full"><option>No (Contamina)</option><option>Sí</option></select></td>
+                <td class="p-2"><select id="t3f1-biodegradabilitat-vidre" class="p-1 border rounded bg-emerald-50 w-full"><option>No (Reciclable)</option><option>Sí</option></select></td>
               </tr>
             </tbody>
           </table>
@@ -716,7 +758,14 @@
 
         <div class="bg-cork-50/70 p-3 rounded-xl border border-cork-200 text-xs">
           <label class="font-bold text-cork-900 block mb-1">💡 Conclusió científica:</label>
-          <textarea rows="2" placeholder="El suro és un material ideal per als taps i la construcció sostenible perquè..." class="w-full p-2 border rounded bg-white outline-none focus:border-cork-500"></textarea>
+          <textarea id="t3f1-conclusio" rows="2" placeholder="El suro és un material ideal per als taps i la construcció sostenible perquè..." class="w-full p-2 border rounded bg-white outline-none focus:border-cork-500"></textarea>
+        </div>
+      
+        <div class="flex items-center gap-3 pt-2 mt-2 border-t border-gray-100">
+          <button onclick="saveFitxaAnswers('t3-fitxa1', 'T3: Suro')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
+            💾 Desar aquesta fitxa
+          </button>
+          <span id="t3-fitxa1-save-status" class="text-[11px] text-gray-500"></span>
         </div>
       </div>
 
@@ -745,6 +794,13 @@
             </button>
             <span id="speech-status" class="text-gray-500 italic text-[11px]">Prem per provar la lectura del guió.</span>
           </div>
+        </div>
+      
+        <div class="flex items-center gap-3 pt-2 mt-2 border-t border-gray-100">
+          <button onclick="saveFitxaAnswers('t3-fitxa2', 'T3: Suro')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
+            💾 Desar aquesta fitxa
+          </button>
+          <span id="t3-fitxa2-save-status" class="text-[11px] text-gray-500"></span>
         </div>
       </div>
     </section>
@@ -1015,6 +1071,115 @@
         document.getElementById('teacher-panel-content').classList.add('hidden');
         setTimeout(() => document.getElementById('teacher-password-input').focus(), 50);
       }
+    }
+
+    // ==================== RESPOSTES DE LES FITXES (per alumne i sessió) ====================
+    // Per a cada fitxa, quins camps cal recollir i quina etiqueta (Camp) ha de sortir al full
+    const FITXA_FIELDS = {
+      't1-fitxa1': [
+        { id: 't1-q1', label: 'Observacions prèvies' },
+        { id: 't1-hypothesis', label: 'Hipòtesi d\'equip' }
+      ],
+      't1-fitxa2': [
+        { id: 't1f2-a-aigua', label: 'Sòl A (vegetació) - Aigua (ml)' },
+        { id: 't1f2-a-aspecte', label: 'Sòl A (vegetació) - Aspecte' },
+        { id: 't1f2-a-terra', label: 'Sòl A (vegetació) - Terra arrossegada' },
+        { id: 't1f2-b-aigua', label: 'Sòl B (nua) - Aigua (ml)' },
+        { id: 't1f2-b-aspecte', label: 'Sòl B (nua) - Aspecte' },
+        { id: 't1f2-b-terra', label: 'Sòl B (nua) - Terra arrossegada' },
+        { id: 't1f2-c-aigua', label: 'Sòl C (cremat) - Aigua (ml)' },
+        { id: 't1f2-c-aspecte', label: 'Sòl C (cremat) - Aspecte' },
+        { id: 't1f2-c-terra', label: 'Sòl C (cremat) - Terra arrossegada' }
+      ],
+      't1-fitxa3': [
+        { id: 'layer-1', label: 'Filtre - Capa 1 (Dalt)' },
+        { id: 'layer-2', label: 'Filtre - Capa 2' },
+        { id: 'layer-3', label: 'Filtre - Capa 3' },
+        { id: 'layer-4', label: 'Filtre - Capa 4' },
+        { id: 'layer-5', label: 'Filtre - Capa 5 (Baix)' }
+      ],
+      't2-fitxa1': [
+        { id: 't2f1-posidonia', label: 'Observació Posidònia' },
+        { id: 't2f1-egagropila', label: 'Observació egagròpila' }
+      ],
+      't2-fitxa2': [
+        { id: 'robot-speed', label: 'Velocitat del robot (%)' },
+        { id: 'robot-wait', label: 'Segons d\'espera' }
+      ],
+      't2-fitxa3': [
+        { id: 't2f3-error1-que', label: 'Error 1 - Què ha passat' },
+        { id: 't2f3-error1-perque', label: 'Error 1 - Per què' },
+        { id: 't2f3-error1-solucio', label: 'Error 1 - Solució' },
+        { id: 't2f3-error2-que', label: 'Error 2 - Què ha passat' },
+        { id: 't2f3-error2-perque', label: 'Error 2 - Per què' },
+        { id: 't2f3-error2-solucio', label: 'Error 2 - Solució' }
+      ],
+      't3-fitxa1': [
+        { id: 't3f1-flotabilitat-suro', label: 'Flotabilitat - Suro' },
+        { id: 't3f1-flotabilitat-plastic', label: 'Flotabilitat - Plàstic' },
+        { id: 't3f1-flotabilitat-vidre', label: 'Flotabilitat - Vidre' },
+        { id: 't3f1-impermeabilitat-suro', label: 'Impermeabilitat - Suro' },
+        { id: 't3f1-impermeabilitat-plastic', label: 'Impermeabilitat - Plàstic' },
+        { id: 't3f1-impermeabilitat-vidre', label: 'Impermeabilitat - Vidre' },
+        { id: 't3f1-aillament-suro', label: 'Aïllament tèrmic - Suro' },
+        { id: 't3f1-aillament-plastic', label: 'Aïllament tèrmic - Plàstic' },
+        { id: 't3f1-aillament-vidre', label: 'Aïllament tèrmic - Vidre' },
+        { id: 't3f1-biodegradabilitat-suro', label: 'Biodegradabilitat - Suro' },
+        { id: 't3f1-biodegradabilitat-plastic', label: 'Biodegradabilitat - Plàstic' },
+        { id: 't3f1-biodegradabilitat-vidre', label: 'Biodegradabilitat - Vidre' },
+        { id: 't3f1-conclusio', label: 'Conclusió científica' }
+      ],
+      't3-fitxa2': [
+        { id: 'script-title', label: 'Títol de la parada del museu' },
+        { id: 'script-body', label: 'Guió de l\'àudio-guia' }
+      ]
+    };
+
+    function currentSessionForFitxa(fitxaId) {
+      const trimesterKey = fitxaId.split('-')[0]; // 't1', 't2' o 't3'
+      return lockState['session' + trimesterKey.toUpperCase()] || 1;
+    }
+
+    async function saveFitxaAnswers(fitxaId, trimesterLabel) {
+      const name = document.getElementById('student-name').value.trim();
+      if (!name) {
+        alert('Cal escriure el teu nom a la pestanya Equip abans de desar.');
+        return;
+      }
+      const studentClass = document.getElementById('student-class').value;
+      const teamName = document.getElementById('team-name').value.trim();
+      const session = currentSessionForFitxa(fitxaId);
+      const now = new Date();
+      const dateLabel = now.toLocaleDateString('ca-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }) +
+                         ' · ' + now.toLocaleTimeString('ca-ES', { hour: '2-digit', minute: '2-digit' });
+
+      const statusEl = document.getElementById(fitxaId + '-save-status');
+      if (statusEl) statusEl.innerText = '⏳ Desant...';
+
+      const fields = FITXA_FIELDS[fitxaId] || [];
+      const answered = fields
+        .map(f => ({ label: f.label, value: (document.getElementById(f.id) || {}).value }))
+        .filter(f => f.value && String(f.value).trim().length > 0);
+
+      if (answered.length === 0) {
+        if (statusEl) statusEl.innerText = '⚠️ No hi ha cap resposta escrita encara.';
+        setTimeout(() => { if (statusEl) statusEl.innerText = ''; }, 3000);
+        return;
+      }
+
+      try {
+        for (const f of answered) {
+          await postToSheet({
+            sheet: 'Respostes',
+            headers: ['Data i hora', 'Nom', 'Classe', 'Equip', 'Trimestre', 'Sessió', 'Fitxa', 'Camp', 'Resposta'],
+            row: [dateLabel, name, studentClass, teamName, trimesterLabel, session, fitxaId, f.label, f.value]
+          });
+        }
+        if (statusEl) statusEl.innerText = '✅ Fitxa desada correctament.';
+      } catch (e) {
+        if (statusEl) statusEl.innerText = '⚠️ No s\'ha pogut desar. Comprova la connexió i torna-ho a provar.';
+      }
+      setTimeout(() => { if (statusEl) statusEl.innerText = ''; }, 4000);
     }
 
     // ==================== SINCRONITZACIÓ AMB GOOGLE SHEETS (DRIVE) ====================
