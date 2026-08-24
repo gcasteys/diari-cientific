@@ -24,14 +24,18 @@
     }
   </script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Quicksand:wght@400;600;700&display=swap');
     body {
       font-family: 'Quicksand', sans-serif;
       background-color: #FDFBF7;
       color: #2D3748;
     }
     h1, h2, h3, h4, .font-heading {
-      font-family: 'Fredoka', cursive;
+      font-family: 'Baloo 2', cursive;
+      letter-spacing: 0.005em;
+    }
+    h3 {
+      letter-spacing: 0.01em;
     }
     .chart-container {
       position: relative;
@@ -127,11 +131,11 @@
             </select>
           </div>
           <div>
-            <label class="block font-bold mb-1 text-gray-300">Setmana actual — T1 Gavarres:</label>
+            <label class="block font-bold mb-1 text-gray-300">Activitat actual — T1 Gavarres:</label>
             <input type="number" id="cfg-session-t1" min="1" max="8" value="1" class="w-full p-1.5 rounded text-gray-900">
           </div>
           <div>
-            <label class="block font-bold mb-1 text-gray-300">Sessió actual — T2 Posidònia:</label>
+            <label class="block font-bold mb-1 text-gray-300">Activitat actual — T2 Posidònia:</label>
             <input type="number" id="cfg-session-t2" min="1" max="11" value="1" class="w-full p-1.5 rounded text-gray-900">
           </div>
           <div>
@@ -321,8 +325,9 @@
       <!-- Intro Paragraph -->
       <div class="bg-forest-50 p-6 rounded-2xl border border-forest-500/20 shadow-sm">
         <h2 class="text-2xl font-bold text-forest-700 flex items-center gap-2">
-          <span>🟢</span> TRIMESTRE 1: "Després del foc: Aigua, bosc i vida a les Gavarres"
+          <span>🟢</span> 1r TRIMESTRE
         </h2>
+        <p class="text-lg font-bold text-forest-800 mt-1">Després del foc: Aigua, bosc i vida a les Gavarres</p>
         <p class="text-sm text-gray-700 mt-2 leading-relaxed">
           En aquest primer bloc investiguem l'impacte dels incendis forestals al massís de les Gavarres i el fenomen de l'erosió del sòl quan arriben les pluges de tardor. A través de la simulació de laboratori, el disseny d'un filtre d'aigua casolà i la creació d'un senyalitzador de fusta amb talladora làser, aprendrem a protegir el nostre entorn natural.
         </p>
@@ -331,7 +336,7 @@
       <!-- SETMANA 1: Anàlisi de l'incendi -->
       <div id="t1-w1" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>SETMANA 1: L'incendi de les Gavarres — Causes i efectes</span>
+          <span>ACTIVITAT 1: L'incendi de les Gavarres — Causes i efectes</span>
           <span class="text-xs font-normal text-gray-500">Sessió 1.1 i 1.2</span>
         </h3>
 
@@ -361,7 +366,7 @@
       <!-- SETMANA 2: El bosc de les Gavarres -->
       <div id="t1-w2" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>SETMANA 2: El bosc de les Gavarres — Patrimoni i adaptació</span>
+          <span>ACTIVITAT 2: El bosc de les Gavarres — Patrimoni i adaptació</span>
           <span class="text-xs font-normal text-gray-500">Sessió 2.1 i 2.2</span>
         </h3>
 
@@ -395,8 +400,8 @@
       <!-- FITXA 1: Hipòtesi -->
       <div id="t1-fitxa1" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>SETMANA 3a: Les pluges de tardor — Plantegem la hipòtesi</span>
-          <span class="text-xs font-normal text-gray-500">Setmana 3 · Sessió 3.1</span>
+          <span>ACTIVITAT 3: Les pluges de tardor — Plantegem la hipòtesi</span>
+          <span class="text-xs font-normal text-gray-500">Sessió 3.1</span>
         </h3>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
@@ -424,8 +429,8 @@
       <!-- FITXA 2: Experiment d'Erosió (Canvas Simulator) -->
       <div id="t1-fitxa2" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>SETMANA 3b: Les pluges de tardor — Registrem l'experiment</span>
-          <span class="text-xs font-normal text-gray-500">Setmana 3 · Sessió 3.2</span>
+          <span>ACTIVITAT 4: Les pluges de tardor — Registrem l'experiment</span>
+          <span class="text-xs font-normal text-gray-500">Sessió 3.2</span>
         </h3>
 
         <p class="text-sm text-gray-600">
@@ -477,7 +482,7 @@
       <!-- SETMANA 4: Disseny del Filtre (planificació) -->
       <div id="t1-w4" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>SETMANA 4: Pensament de disseny — Com netegem l'aigua de la riera?</span>
+          <span>ACTIVITAT 5: Pensament de disseny — Com netegem l'aigua de la riera?</span>
           <span class="text-xs font-normal text-gray-500">Sessió 4.1 i 4.2</span>
         </h3>
 
@@ -552,7 +557,7 @@
       <!-- FITXA 3: Taller Maker Filtre d'Aigua -->
       <div id="t1-fitxa3" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>SETMANA 5: Taller d'enginyeria — Construcció i prova del filtre</span>
+          <span>ACTIVITAT 6: Taller d'enginyeria — Construcció i prova del filtre</span>
           <span class="text-xs font-normal text-gray-500">Sessió 5.1 i 5.2</span>
         </h3>
 
@@ -650,7 +655,7 @@
       <!-- SETMANA 6: Senyal per a la Talladora Làser -->
       <div id="t1-w6" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>SETMANA 6: Fabricació digital — Disseny del senyal per a la Talladora Làser</span>
+          <span>ACTIVITAT 7: Fabricació digital — Disseny del senyal per a la Talladora Làser</span>
           <span class="text-xs font-normal text-gray-500">Sessió 6.1 i 6.2</span>
         </h3>
 
@@ -674,7 +679,7 @@
       <!-- SETMANA 7: Taller Maker (activitat física, sense fitxa digital) -->
       <div id="t1-w7-info" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>SETMANA 7: Taller Maker — Tallat i gravat en fusta</span>
+          <span>ACTIVITAT 8: Taller Maker — Tallat i gravat en fusta</span>
           <span class="text-xs font-normal text-gray-500">Sessió 7.1 i 7.2</span>
         </h3>
         <p class="text-sm text-gray-600 mt-3">
@@ -688,17 +693,18 @@
       <!-- Intro Paragraph -->
       <div class="bg-ocean-50 p-6 rounded-2xl border border-ocean-500/20 shadow-sm">
         <h2 class="text-2xl font-bold text-ocean-700 flex items-center gap-2">
-          <span>🔵</span> TRIMESTRE 2: "Ruta submarina: Robòtica per protegir la Posidònia"
+          <span>🔵</span> 2n TRIMESTRE
         </h2>
+        <p class="text-lg font-bold text-ocean-800 mt-1">Ruta submarina: Robòtica per protegir la Posidònia</p>
         <p class="text-sm text-gray-700 mt-2 leading-relaxed">
           En aquest segon trimestre explorem la biodiversitat marina de les cales de Palafrugell (Calella, Llafranc i Tamariu) i la importància vital de la <em>Posidonia oceanica</em>. Dissenyarem, muntarem i programarem un robot vaixell autònom capaç de patrullar la costa i detectar àrees protegides per evitar l'ancoratge incontrolat d'embarcacions.
         </p>
       </div>
 
-      <!-- SESSIÓ 1: El fons marí de les cales de Palafrugell -->
+      <!-- ACTIVITAT 1: El fons marí de les cales de Palafrugell -->
       <div id="t2-s1" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>SESSIÓ 1: El fons marí de les cales de Palafrugell</span>
+          <span>ACTIVITAT 1: El fons marí de les cales de Palafrugell</span>
           <span class="text-xs font-normal text-gray-500">Sessió 1</span>
         </h3>
 
@@ -719,10 +725,10 @@
         </div>
       </div>
 
-      <!-- SESSIÓ 2: El misteri de la Posidònia -->
+      <!-- ACTIVITAT 2: El misteri de la Posidònia -->
       <div id="t2-fitxa1" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>SESSIÓ 2: El misteri de la Posidònia</span>
+          <span>ACTIVITAT 2: El misteri de la Posidònia</span>
           <span class="text-xs font-normal text-gray-500">Sessió 2</span>
         </h3>
 
@@ -739,10 +745,10 @@
         </div>
       </div>
 
-      <!-- SESSIÓ 3: Cartografia del litoral (activitat física, sense fitxa digital) -->
+      <!-- ACTIVITAT 3: Cartografia del litoral (activitat física, sense fitxa digital) -->
       <div id="t2-s3-info" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
         <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>SESSIÓ 3: Cartografia del litoral</span>
+          <span>ACTIVITAT 3: Cartografia del litoral</span>
           <span class="text-xs font-normal text-gray-500">Sessió 3</span>
         </h3>
         <p class="text-sm text-gray-600 mt-3">
@@ -750,10 +756,10 @@
         </p>
       </div>
 
-      <!-- SESSIÓ 4: Taller de ciència marina -->
+      <!-- ACTIVITAT 4: Taller de ciència marina -->
       <div id="t2-s4" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>SESSIÓ 4: Taller de ciència marina</span>
+          <span>ACTIVITAT 4: Taller de ciència marina</span>
           <span class="text-xs font-normal text-gray-500">Sessió 4</span>
         </h3>
 
@@ -774,10 +780,10 @@
         </div>
       </div>
 
-      <!-- SESSIÓ 5: Pensament Computacional (disseny en paper) -->
+      <!-- ACTIVITAT 5: Pensament Computacional (disseny en paper) -->
       <div id="t2-s5" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>SESSIÓ 5: Pensament Computacional</span>
+          <span>ACTIVITAT 5: Pensament Computacional</span>
           <span class="text-xs font-normal text-gray-500">Sessió 5</span>
         </h3>
 
@@ -798,10 +804,10 @@
         </div>
       </div>
 
-      <!-- SESSIÓ 6: Muntatge Maker del robot (activitat física, sense fitxa digital) -->
+      <!-- ACTIVITAT 6: Muntatge Maker del robot (activitat física, sense fitxa digital) -->
       <div id="t2-s6-info" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
         <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>SESSIÓ 6: Muntatge Maker del robot</span>
+          <span>ACTIVITAT 6: Muntatge Maker del robot</span>
           <span class="text-xs font-normal text-gray-500">Sessió 6</span>
         </h3>
         <p class="text-sm text-gray-600 mt-3">
@@ -809,10 +815,10 @@
         </p>
       </div>
 
-      <!-- SESSIÓ 7: Programació i Sensors (LEGO SPIKE Prime) -->
+      <!-- ACTIVITAT 7: Programació i Sensors (LEGO SPIKE Prime) -->
       <div id="t2-s7" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>SESSIÓ 7: Programació i Sensors</span>
+          <span>ACTIVITAT 7: Programació i Sensors</span>
           <span class="text-xs font-normal text-gray-500">Sessió 7</span>
         </h3>
 
@@ -833,10 +839,10 @@
         </div>
       </div>
 
-      <!-- SESSIÓ 8: Maqueta interactiva (activitat física, sense fitxa digital) -->
+      <!-- ACTIVITAT 8: Maqueta interactiva (activitat física, sense fitxa digital) -->
       <div id="t2-s8-info" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
         <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>SESSIÓ 8: Maqueta interactiva</span>
+          <span>ACTIVITAT 8: Maqueta interactiva</span>
           <span class="text-xs font-normal text-gray-500">Sessió 8</span>
         </h3>
         <p class="text-sm text-gray-600 mt-3">
@@ -844,10 +850,10 @@
         </p>
       </div>
 
-      <!-- SESSIÓ 9: Cadena de causalitat -->
+      <!-- ACTIVITAT 9: Cadena de causalitat -->
       <div id="t2-s9" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>SESSIÓ 9: Cadena de causalitat</span>
+          <span>ACTIVITAT 9: Cadena de causalitat</span>
           <span class="text-xs font-normal text-gray-500">Sessió 9</span>
         </h3>
 
@@ -874,10 +880,10 @@
         </div>
       </div>
 
-      <!-- SESSIÓ 10: Assaig i Depuració -->
+      <!-- ACTIVITAT 10: Assaig i Depuració -->
       <div id="t2-fitxa3" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>SESSIÓ 10: Assaig i Depuració</span>
+          <span>ACTIVITAT 10: Assaig i Depuració</span>
           <span class="text-xs font-normal text-gray-500">Sessió 10</span>
         </h3>
 
@@ -918,10 +924,10 @@
         </div>
       </div>
 
-      <!-- SESSIÓ 11: Guia Nàutica Sostenible -->
+      <!-- ACTIVITAT 11: Guia Nàutica Sostenible -->
       <div id="t2-s11" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>SESSIÓ 11: Guia Nàutica Sostenible</span>
+          <span>ACTIVITAT 11: Guia Nàutica Sostenible</span>
           <span class="text-xs font-normal text-gray-500">Sessió 11</span>
         </h3>
 
@@ -948,8 +954,9 @@
       <!-- Intro Paragraph -->
       <div class="bg-cork-50 p-6 rounded-2xl border border-cork-500/20 shadow-sm">
         <h2 class="text-2xl font-bold text-cork-700 flex items-center gap-2">
-          <span>🟡</span> TRIMESTRE 3: "D'alzina a tap: La història del suro a Palafrugell"
+          <span>🟡</span> 3r TRIMESTRE
         </h2>
+        <p class="text-lg font-bold text-cork-800 mt-1">D'alzina a tap: La història del suro a Palafrugell</p>
         <p class="text-sm text-gray-700 mt-2 leading-relaxed">
           En aquest darrer bloc connectem amb el patrimoni industrial i la identitat de Palafrugell. Analitzarem les propietats científiques del suro (flotabilitat, impermeabilitat i aïllament) en comparació amb altres materials, investigarem la sortida al Museu del Suro i Can Mario, i crearem un guió per a l'àudio-guia del nostre Museu Pop-Up.
         </p>
@@ -1240,14 +1247,14 @@
     // Configuració de quina sessió desbloqueja cada fitxa dins de cada trimestre
     const LOCK_CONFIG = {
       t1: [
-        { id: 't1-w1', session: 1, label: 'Setmana 1: Anàlisi de l\'incendi' },
-        { id: 't1-w2', session: 2, label: 'Setmana 2: El bosc de les Gavarres' },
-        { id: 't1-fitxa1', session: 3, label: 'Setmana 3: Hipòtesi' },
-        { id: 't1-fitxa2', session: 3, label: 'Setmana 3: Simulador d\'Erosió' },
-        { id: 't1-w4', session: 4, label: 'Setmana 4: Disseny del Filtre' },
-        { id: 't1-fitxa3', session: 5, label: 'Setmana 5: Construcció i Prova del Filtre' },
-        { id: 't1-w6', session: 6, label: 'Setmana 6: Senyal per a la Làser' },
-        { id: 't1-w7-info', session: 7, label: 'Setmana 7: Taller Maker' }
+        { id: 't1-w1', session: 1, label: 'Activitat 1: Anàlisi de l\'incendi' },
+        { id: 't1-w2', session: 2, label: 'Activitat 2: El bosc de les Gavarres' },
+        { id: 't1-fitxa1', session: 3, label: 'Activitat 3: Hipòtesi' },
+        { id: 't1-fitxa2', session: 4, label: 'Activitat 4: Simulador d\'Erosió' },
+        { id: 't1-w4', session: 5, label: 'Activitat 5: Disseny del Filtre' },
+        { id: 't1-fitxa3', session: 6, label: 'Activitat 6: Construcció i Prova del Filtre' },
+        { id: 't1-w6', session: 7, label: 'Activitat 7: Senyal per a la Làser' },
+        { id: 't1-w7-info', session: 8, label: 'Activitat 8: Taller Maker' }
       ],
       t2: [
         { id: 't2-s1', session: 1, label: 'Sessió 1: El fons marí de Palafrugell' },
@@ -1660,7 +1667,7 @@
           overlay.className = 'lock-overlay absolute inset-0 z-10 flex flex-col items-center justify-center text-center bg-white/90 backdrop-blur-sm rounded-2xl border-2 border-dashed border-gray-300 p-4';
           el.appendChild(overlay);
         }
-        const unitWord = el.id.startsWith('t1-') ? 'Setmana' : 'Sessió';
+        const unitWord = 'Activitat';
         overlay.innerHTML = `
           <div class="text-3xl mb-2">🔒</div>
           <div class="font-bold text-gray-700 text-sm font-heading">${fitxa.label}</div>
@@ -1835,7 +1842,7 @@
               max: 4,
               ticks: { stepSize: 1 },
               pointLabels: {
-                font: { size: 11, family: 'Fredoka' }
+                font: { size: 11, family: 'Baloo 2' }
               }
             }
           },
