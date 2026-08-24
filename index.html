@@ -1233,6 +1233,9 @@
           sessionLog = result.rows.map((row, idx) => ({
             id: 'row-' + idx,
             dateLabel: row['Data i hora'],
+            studentName: row['Nom'] || '',
+            studentClass: row['Classe'] || '',
+            teamName: row['Equip'] || '',
             trimesterLabel: row['Trimestre'],
             session: row['Sessió'],
             moodIcon: row['Estat'],
@@ -1247,6 +1250,13 @@
     }
 
     async function addSessionLog() {
+      const name = document.getElementById('student-name').value.trim();
+      if (!name) {
+        alert('Cal escriure el teu nom a la pestanya Equip abans de desar.');
+        return;
+      }
+      const studentClass = document.getElementById('student-class').value;
+      const teamName = document.getElementById('team-name').value.trim();
       const trimester = document.getElementById('log-trimester').value;
       const session = parseInt(document.getElementById('log-session').value, 10) || 1;
       const note = document.getElementById('log-note').value.trim();
@@ -1260,8 +1270,8 @@
       try {
         await postToSheet({
           sheet: 'Seguiment',
-          headers: ['Data i hora', 'Trimestre', 'Sessió', 'Estat', 'Anotació'],
-          row: [dateLabel, TRIMESTER_LABEL[trimester] || trimester, session, MOOD_ICON[currentLogMood], note]
+          headers: ['Data i hora', 'Nom', 'Classe', 'Equip', 'Trimestre', 'Sessió', 'Estat', 'Anotació'],
+          row: [dateLabel, name, studentClass, teamName, TRIMESTER_LABEL[trimester] || trimester, session, MOOD_ICON[currentLogMood], note]
         });
         statusEl.innerText = '✅ Registre afegit i desat al full de càlcul.';
         document.getElementById('log-note').value = '';
@@ -1289,6 +1299,7 @@
           <div class="text-xl leading-none pt-0.5">${entry.moodIcon || '🟢'}</div>
           <div class="flex-1">
             <div class="flex flex-wrap items-center gap-2">
+              ${entry.studentName ? `<span class="font-bold text-gray-900">${escapeHtml(entry.studentName)}</span><span class="text-gray-400">·</span>` : ''}
               <span class="font-bold text-slate-800">${entry.trimesterLabel}</span>
               <span class="text-gray-400">·</span>
               <span class="font-semibold text-gray-600">Sessió ${entry.session}</span>
@@ -1670,11 +1681,14 @@
         alert('Encara no hi ha cap registre de seguiment per exportar.');
         return;
       }
-      const headers = ['Data i hora', 'Trimestre', 'Sessió', 'Estat', 'Anotació'];
+      const headers = ['Data i hora', 'Nom', 'Classe', 'Equip', 'Trimestre', 'Sessió', 'Estat', 'Anotació'];
       const csvRows = [headers.join(';')];
       sessionLog.forEach(entry => {
         const row = [
           entry.dateLabel,
+          entry.studentName || '',
+          entry.studentClass || '',
+          entry.teamName || '',
           entry.trimesterLabel,
           entry.session,
           entry.moodIcon,
