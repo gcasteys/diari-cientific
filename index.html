@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔬 Diari Científic</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandBg: '#FDFBF7',
+            forest: { 50: '#F2F9F1', 500: '#3B7A57', 700: '#26533A' },
+            ocean: { 50: '#F0F8FA', 500: '#1E6B7B', 700: '#134752' },
+            cork: { 50: '#FAF5EE', 500: '#C88A35', 700: '#8C5C1E' },
+            sand: '#EFE7DA'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;600;700&display=swap');
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background-color: #FDFBF7;
+      color: #2D3748;
+    }
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Fredoka', cursive;
+    }
+    .chart-container {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      height: 320px;
+      max-height: 380px;
+    }
+    @media (min-width: 768px) {
+      .chart-container {
+        height: 350px;
+      }
+    }
+    @media print {
+      .no-print { display: none !important; }
+      .print-only { display: block !important; }
+      body { background-color: white; color: black; }
+      .tab-content { display: block !important; page-break-after: always; }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+  <!-- HEADER & NAVIGATION -->
+  <header class="bg-sand/60 border-b border-amber-200 sticky top-0 z-50 backdrop-blur-md no-print">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <span class="text-3xl">🔬</span>
+        <div>
+          <h1 class="text-xl md:text-2xl font-bold text-gray-800 leading-none">DIARI CIENTÍFIC</h1>
+          <p class="text-xs text-gray-600 font-semibold">4t de Primària — Escola Vedruna - Prats de la Carrera (Palafrugell)</p>
+        </div>
+      </div>
+
+      <!-- Nav Tabs -->
+      <nav class="flex flex-wrap justify-center gap-1 text-xs md:text-sm font-bold">
+        <button onclick="switchTab('equip')" id="btn-equip" class="tab-btn active px-3 py-1.5 rounded-lg transition-all bg-amber-500 text-white shadow">
+          👤 Equip
+        </button>
+        <button onclick="switchTab('seguiment')" id="btn-seguiment" class="tab-btn px-3 py-1.5 rounded-lg transition-all hover:bg-slate-600 hover:text-white bg-white text-slate-700 border border-slate-500/30">
+          📋 Seguiment
+        </button>
+        <button onclick="switchTab('t1')" id="btn-t1" class="tab-btn px-3 py-1.5 rounded-lg transition-all hover:bg-forest-500 hover:text-white bg-white text-forest-700 border border-forest-500/30">
+          🟢 T1: Gavarres
+        </button>
+        <button onclick="switchTab('t2')" id="btn-t2" class="tab-btn px-3 py-1.5 rounded-lg transition-all hover:bg-ocean-500 hover:text-white bg-white text-ocean-700 border border-ocean-500/30">
+          🔵 T2: Posidònia
+        </button>
+        <button onclick="switchTab('t3')" id="btn-t3" class="tab-btn px-3 py-1.5 rounded-lg transition-all hover:bg-cork-500 hover:text-white bg-white text-cork-700 border border-cork-500/30">
+          🟡 T3: Suro
+        </button>
+        <button onclick="switchTab('eval')" id="btn-eval" class="tab-btn px-3 py-1.5 rounded-lg transition-all hover:bg-purple-600 hover:text-white bg-white text-purple-700 border border-purple-500/30">
+          🎯 Avalua't
+        </button>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- PANELL DEL DOCENT -->
+  <div class="no-print bg-gray-800 text-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <button onclick="toggleTeacherPanel()" id="teacher-toggle-btn" class="w-full text-left text-[11px] font-bold py-1.5 flex items-center justify-between text-gray-300 hover:text-white">
+        <span>🔐 Panell del Docent (control de progrés)</span>
+        <span id="teacher-toggle-icon">▾</span>
+      </button>
+      <div id="teacher-panel" class="hidden pb-4 pt-1 border-t border-gray-700">
+
+        <!-- PANTALLA DE CONTRASENYA -->
+        <div id="teacher-password-gate" class="flex flex-col sm:flex-row items-start sm:items-end gap-2 pt-2">
+          <div class="flex-1 max-w-xs">
+            <label class="block font-bold mb-1 text-gray-300 text-xs">Contrasenya del Panell del Docent:</label>
+            <input type="password" id="teacher-password-input" placeholder="••••••••" onkeydown="if(event.key==='Enter') checkTeacherPassword()" class="w-full p-1.5 rounded text-gray-900 text-xs">
+          </div>
+          <button onclick="checkTeacherPassword()" class="bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs px-4 py-2 rounded-lg">
+            🔓 Accedir
+          </button>
+          <span id="teacher-password-error" class="text-[11px] text-red-400"></span>
+        </div>
+
+        <!-- CONTINGUT PROTEGIT -->
+        <div id="teacher-panel-content" class="hidden pt-2">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs items-end">
+          <div>
+            <label class="block font-bold mb-1 text-gray-300">Trimestre desbloquejat fins a:</label>
+            <select id="cfg-trimester" class="w-full p-1.5 rounded text-gray-900">
+              <option value="1">Només T1: Gavarres</option>
+              <option value="2">Fins a T2: Posidònia</option>
+              <option value="3">Fins a T3: Suro (tot el curs)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold mb-1 text-gray-300">Sessió actual — T1 Gavarres:</label>
+            <input type="number" id="cfg-session-t1" min="1" max="10" value="1" class="w-full p-1.5 rounded text-gray-900">
+          </div>
+          <div>
+            <label class="block font-bold mb-1 text-gray-300">Sessió actual — T2 Posidònia:</label>
+            <input type="number" id="cfg-session-t2" min="1" max="10" value="1" class="w-full p-1.5 rounded text-gray-900">
+          </div>
+          <div>
+            <label class="block font-bold mb-1 text-gray-300">Sessió actual — T3 Suro:</label>
+            <input type="number" id="cfg-session-t3" min="1" max="10" value="1" class="w-full p-1.5 rounded text-gray-900">
+          </div>
+        </div>
+        <div class="flex items-center gap-3 mt-3">
+          <button onclick="saveTeacherConfig()" class="bg-emerald-600 hover:bg-emerald-500 font-bold text-xs px-4 py-2 rounded-lg">
+            💾 Desar i aplicar bloquejos
+          </button>
+          <button onclick="exportSessionLogCSV()" class="bg-slate-600 hover:bg-slate-500 font-bold text-xs px-4 py-2 rounded-lg">
+            📥 Exportar Seguiment a CSV
+          </button>
+          <span id="teacher-save-status" class="text-[11px] text-gray-400"></span>
+        </div>
+        <p class="text-[10px] text-gray-400 mt-2">
+          En augmentar el número de sessió o el trimestre desbloquejat, les fitxes i pestanyes corresponents es desbloquegen automàticament per a tot l'alumnat.
+        </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-6xl mx-auto px-4 py-6 flex-grow w-full">
+
+    <!-- ==================== TAB 0: EQUIP I ROLS ==================== -->
+    <section id="tab-equip" class="tab-content block space-y-6">
+      <div class="bg-white p-6 rounded-2xl shadow-sm border border-amber-100">
+        <div class="border-b pb-4 mb-4">
+          <h2 class="text-2xl font-bold text-amber-800 flex items-center gap-2">
+            <span>👤</span> Les Meves Dades i el Meu Equip Cooperatiu
+          </h2>
+          <p class="text-sm text-gray-600 mt-1">
+            Benvingut/da al teu llibre de bitàcola de 4t de Primària! En aquest diari registraràs totes les teves hipòtesis, experiments de laboratori i reptes Maker per protegir el medi ambient de Palafrugell.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+          <div class="space-y-3 bg-amber-50/50 p-4 rounded-xl border border-amber-200/60">
+            <h3 class="font-bold text-amber-900 font-heading text-base">🆔 L'Investigador / L'Investigadora</h3>
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1">Nom i cognoms: <span class="text-red-500">*</span> <span class="font-normal text-gray-500">(obligatori per poder respondre a la resta del diari)</span></label>
+              <input type="text" id="student-name" oninput="onStudentNameInput()" placeholder="Escriu el teu nom..." class="w-full p-2 border rounded-lg text-sm bg-white focus:ring-2 focus:ring-amber-500 outline-none">
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Classe / Curs:</label>
+                <select id="student-class" class="w-full p-2 border rounded-lg text-sm bg-white outline-none">
+                  <option value="4t A">4t A</option>
+                  <option value="4t B">4t B</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Nom de l'Equip:</label>
+                <input type="text" id="team-name" placeholder="Ex: Els Suredors" class="w-full p-2 border rounded-lg text-sm bg-white outline-none">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-3 bg-amber-50/50 p-4 rounded-xl border border-amber-200/60">
+            <h3 class="font-bold text-amber-900 font-heading text-base">👥 Membres de l'Equip Cooperatiu (5)</h3>
+            <div class="grid grid-cols-1 gap-1.5">
+              <input type="text" placeholder="1. Nom del/de la companya" class="team-member p-1.5 border rounded text-xs bg-white">
+              <input type="text" placeholder="2. Nom del/de la companya" class="team-member p-1.5 border rounded text-xs bg-white">
+              <input type="text" placeholder="3. Nom del/de la companya" class="team-member p-1.5 border rounded text-xs bg-white">
+              <input type="text" placeholder="4. Nom del/de la companya" class="team-member p-1.5 border rounded text-xs bg-white">
+              <input type="text" placeholder="5. Nom del/de la companya" class="team-member p-1.5 border rounded text-xs bg-white">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROLS COOPERATIUS INTERACTIUS -->
+      <div class="bg-white p-6 rounded-2xl shadow-sm border border-amber-100">
+        <h3 class="text-xl font-bold text-gray-800 font-heading mb-2 flex items-center gap-2">
+          <span>🎭</span> Els Nostres Rols Cooperatius
+        </h3>
+        <p class="text-xs text-gray-600 mb-4">
+          Dins de l'equip de 5, cadascú té una responsabilitat important que anirem rotant en cada Situació d'Aprenentatge. Fes clic en el teu rol d'avui per veure la teva missió principal:
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3">
+          <button onclick="selectRole('coordinador')" id="role-coordinador" class="role-btn p-3 rounded-xl border-2 border-amber-200 hover:border-amber-500 bg-amber-50 text-left transition-all">
+            <div class="text-2xl mb-1">💬</div>
+            <div class="font-bold text-xs text-amber-900">Coordinador/a</div>
+            <div class="text-[10px] text-gray-600 mt-1">Dirigeix el grup, dona el torn de paraula i controla el temps.</div>
+          </button>
+
+          <button onclick="selectRole('secretari')" id="role-secretari" class="role-btn p-3 rounded-xl border-2 border-amber-200 hover:border-amber-500 bg-amber-50 text-left transition-all">
+            <div class="text-2xl mb-1">📝</div>
+            <div class="font-bold text-xs text-amber-900">Secretari/a</div>
+            <div class="text-[10px] text-gray-600 mt-1">Revisa que tothom tingui el diari al dia i escriu els acords.</div>
+          </button>
+
+          <button onclick="selectRole('material')" id="role-material" class="role-btn p-3 rounded-xl border-2 border-amber-200 hover:border-amber-500 bg-amber-50 text-left transition-all">
+            <div class="text-2xl mb-1">📦</div>
+            <div class="font-bold text-xs text-amber-900">Resp. Material</div>
+            <div class="text-[10px] text-gray-600 mt-1">Recull, cuida i neteja els materials de laboratori i taller.</div>
+          </button>
+
+          <button onclick="selectRole('enginyer')" id="role-enginyer" class="role-btn p-3 rounded-xl border-2 border-amber-200 hover:border-amber-500 bg-amber-50 text-left transition-all">
+            <div class="text-2xl mb-1">💻</div>
+            <div class="font-bold text-xs text-amber-900">Enginyer/a Maker</div>
+            <div class="text-[10px] text-gray-600 mt-1">Supervisió del muntatge físic, disseny i programació.</div>
+          </button>
+
+          <button onclick="selectRole('portaveu')" id="role-portaveu" class="role-btn p-3 rounded-xl border-2 border-amber-200 hover:border-amber-500 bg-amber-50 text-left transition-all">
+            <div class="text-2xl mb-1">📢</div>
+            <div class="font-bold text-xs text-amber-900">Portaveu</div>
+            <div class="text-[10px] text-gray-600 mt-1">Explica les conclusions de l'equip a la resta de la classe.</div>
+          </button>
+        </div>
+
+        <div id="role-feedback" class="mt-4 p-3 bg-amber-100/70 border border-amber-300 rounded-lg text-xs font-semibold text-amber-900 hidden">
+          <!-- JS fills role mission details -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 1: TRIMESTRE 1 ==================== -->
+    <!-- ==================== TAB 5: SEGUIMENT (REGISTRE PER SESSIÓ) ==================== -->
+    <section id="tab-seguiment" class="tab-content hidden space-y-6">
+      <div class="bg-slate-50 p-6 rounded-2xl border border-slate-400/20 shadow-sm">
+        <h2 class="text-2xl font-bold text-slate-700 flex items-center gap-2">
+          <span>📋</span> Seguiment de Sessions
+        </h2>
+        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+          Un registre ràpid perquè la persona docent anoti, sessió a sessió, com ha anat la classe. Queda tot desat cronològicament per poder-ho repassar de cara a l'avaluació trimestral.
+        </p>
+      </div>
+
+      <!-- FORMULARI DE REGISTRE RÀPID -->
+      <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+        <h3 class="font-bold text-slate-700 font-heading text-lg border-b pb-2">
+          ➕ Nou registre de sessió
+        </h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs items-end">
+          <div>
+            <label class="block font-bold mb-1 text-gray-700">Trimestre:</label>
+            <select id="log-trimester" class="w-full p-2 border rounded-lg bg-white outline-none">
+              <option value="t1">T1: Gavarres</option>
+              <option value="t2">T2: Posidònia</option>
+              <option value="t3">T3: Suro</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold mb-1 text-gray-700">Número de sessió:</label>
+            <input type="number" id="log-session" min="1" max="10" value="1" class="w-full p-2 border rounded-lg bg-white outline-none">
+          </div>
+          <div class="lg:col-span-2">
+            <label class="block font-bold mb-1 text-gray-700">Com ha anat la sessió?</label>
+            <div class="flex gap-2">
+              <button type="button" onclick="setLogMood('verd', this)" class="mood-btn flex-1 p-2 rounded-lg border-2 border-gray-200 bg-white hover:bg-emerald-50 text-lg" data-mood="verd">🟢</button>
+              <button type="button" onclick="setLogMood('groc', this)" class="mood-btn flex-1 p-2 rounded-lg border-2 border-gray-200 bg-white hover:bg-amber-50 text-lg" data-mood="groc">🟡</button>
+              <button type="button" onclick="setLogMood('vermell', this)" class="mood-btn flex-1 p-2 rounded-lg border-2 border-gray-200 bg-white hover:bg-red-50 text-lg" data-mood="vermell">🔴</button>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold mb-1 text-gray-700 text-xs">Anotació (opcional):</label>
+          <textarea id="log-note" rows="2" placeholder="Ex: Han acabat la Fitxa 2, algun grup amb dificultats de coordinació..." class="w-full p-2 border rounded-lg bg-white outline-none focus:border-slate-500 text-xs"></textarea>
+        </div>
+
+        <button onclick="addSessionLog()" class="bg-slate-700 hover:bg-slate-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
+          💾 Afegir al registre
+        </button>
+        <span id="log-add-status" class="text-[11px] text-gray-500 ml-2"></span>
+      </div>
+
+      <!-- HISTORIAL DE REGISTRES -->
+      <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-3">
+        <h3 class="font-bold text-slate-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
+          <span>🗂️ Historial de Sessions</span>
+          <span id="log-count" class="text-xs font-normal text-gray-500">0 registres</span>
+        </h3>
+        <div id="log-list" class="space-y-2 text-xs">
+          <p class="text-gray-400 italic">Encara no hi ha cap registre. Afegeix-ne un des del formulari de dalt.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-t1" class="tab-content hidden space-y-6">
+      <!-- Intro Paragraph -->
+      <div class="bg-forest-50 p-6 rounded-2xl border border-forest-500/20 shadow-sm">
+        <h2 class="text-2xl font-bold text-forest-700 flex items-center gap-2">
+          <span>🟢</span> TRIMESTRE 1: "Després del foc: Aigua, bosc i vida a les Gavarres"
+        </h2>
+        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+          En aquest primer bloc investiguem l'impacte dels incendis forestals al massís de les Gavarres i el fenomen de l'erosió del sòl quan arriben les pluges de tardor. A través de la simulació de laboratori, el disseny d'un filtre d'aigua casolà i la creació d'un senyalitzador de fusta amb talladora làser, aprendrem a protegir el nostre entorn natural.
+        </p>
+      </div>
+
+      <!-- FITXA 1: Hipòtesi -->
+      <div id="t1-fitxa1" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+        <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
+          <span>📌 FITXA 1: Què en sabem i què volem investigar?</span>
+          <span class="text-xs font-normal text-gray-500">Sessió 1 i 2</span>
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div class="bg-gray-50 p-3 rounded-xl space-y-2">
+            <p class="font-bold text-gray-800">1. El repte inicial:</p>
+            <p class="text-gray-600">Què li passa al sòl del bosc quan crema la vegetació? On va a parar la cendra quan plou fort a la tardor?</p>
+            <textarea id="t1-q1" rows="3" placeholder="Anota aquí les teves observacions prèvies..." class="w-full p-2 border rounded bg-white outline-none focus:border-forest-500"></textarea>
+          </div>
+
+          <div class="bg-forest-50/60 p-3 rounded-xl space-y-2 border border-forest-200">
+            <p class="font-bold text-forest-900">2. La nostra hipòtesi d'equip 💡</p>
+            <p class="text-forest-800">Crec que si plou sobre un sòl cremat, l'aigua...</p>
+            <textarea id="t1-hypothesis" rows="3" placeholder="Si plou sobre sòl cremat, l'aigua arrossegarà... perquè..." class="w-full p-2 border rounded bg-white outline-none focus:border-forest-500"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- FITXA 2: Experiment d'Erosió (Canvas Simulator) -->
+      <div id="t1-fitxa2" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+        <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
+          <span>🧪 FITXA 2: Experimentació – Simulador d'Erosió i Pluja</span>
+          <span class="text-xs font-normal text-gray-500">Sessió 4 i 5</span>
+        </h3>
+
+        <p class="text-xs text-gray-600">
+          Activa la pluja virtual sobre les tres ampolles inclinades per observar com respon cada tipus de sòl davant l'aigua de tardor:
+        </p>
+
+        <!-- Canvas Simulator Box -->
+        <div class="bg-gray-900 p-4 rounded-xl text-white text-center space-y-3">
+          <div class="flex justify-center gap-3">
+            <button onclick="startRainSimulation()" class="bg-forest-500 hover:bg-forest-600 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all shadow">
+              🌧️ Iniciar Simulació de Pluja
+            </button>
+            <button onclick="resetRainSimulation()" class="bg-gray-700 hover:bg-gray-600 text-white font-bold text-xs px-3 py-2 rounded-lg">
+              🔄 Reiniciar
+            </button>
+          </div>
+
+          <div class="w-full overflow-x-auto flex justify-center">
+            <canvas id="erosionCanvas" width="600" height="220" class="bg-gray-800 rounded-lg max-w-full"></canvas>
+          </div>
+
+          <div id="sim-status" class="text-xs text-amber-300 font-bold">
+            Prem "Iniciar Simulació de Pluja" per veure l'efecte de l'aigua sobre el sòl.
+          </div>
+        </div>
+
+        <!-- Data Registration Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs text-left border-collapse">
+            <thead>
+              <tr class="bg-forest-50 text-forest-900 border-b">
+                <th class="p-2">Tipus de sòl</th>
+                <th class="p-2">Quantitat d'aigua (ml)</th>
+                <th class="p-2">Aspecte de l'aigua</th>
+                <th class="p-2">Terra arrossegada</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y text-gray-700">
+              <tr>
+                <td class="p-2 font-bold">A: Amb vegetació i arrels</td>
+                <td class="p-2"><input type="text" placeholder="Ex: 80 ml" class="p-1 border rounded w-24"></td>
+                <td class="p-2"><input type="text" placeholder="Neta / Clara" class="p-1 border rounded w-28"></td>
+                <td class="p-2"><input type="text" placeholder="Gairebé gens" class="p-1 border rounded w-32"></td>
+              </tr>
+              <tr>
+                <td class="p-2 font-bold">B: Sòl desnudat (Sense plantes)</td>
+                <td class="p-2"><input type="text" placeholder="Ex: 150 ml" class="p-1 border rounded w-24"></td>
+                <td class="p-2"><input type="text" placeholder="Tèrbola / Marró" class="p-1 border rounded w-28"></td>
+                <td class="p-2"><input type="text" placeholder="Mitjana quantitat" class="p-1 border rounded w-32"></td>
+              </tr>
+              <tr>
+                <td class="p-2 font-bold text-red-600">C: Cremat amb cendra</td>
+                <td class="p-2"><input type="text" placeholder="Ex: 220 ml" class="p-1 border rounded w-24"></td>
+                <td class="p-2"><input type="text" placeholder="Molt negra / Cendra" class="p-1 border rounded w-28"></td>
+                <td class="p-2"><input type="text" placeholder="Molt alta (Erosió)" class="p-1 border rounded w-32"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- FITXA 3: Taller Maker Filtre d'Aigua -->
+      <div id="t1-fitxa3" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+        <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
+          <span>🛠️ FITXA 3: Taller Maker – Disseny del Filtre d'Aigua</span>
+          <span class="text-xs font-normal text-gray-500">Sessió 6 i 7</span>
+        </h3>
+
+        <p class="text-xs text-gray-600">
+          Ordena les capes de materials filtrants de dalt a baix per netejar l'aigua tèrbola amb cendra:
+        </p>
+
+        <!-- Builder Interactive UI -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+          <!-- Layer selector -->
+          <div class="space-y-2 bg-gray-50 p-3 rounded-xl text-xs">
+            <p class="font-bold text-gray-800">Selecciona el material per a cada capa (De dalt a baix):</p>
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between gap-2">
+                <span class="font-bold text-gray-600">Capa 1 (Dalt):</span>
+                <select id="layer-1" onchange="updateFilterVisual()" class="border p-1 rounded bg-white w-40">
+                  <option value="Grava">Grava (Pedres grans)</option>
+                  <option value="Sorra Gruixuda">Sorra Gruixuda</option>
+                  <option value="Sorra Fina">Sorra Fina</option>
+                  <option value="Carbó Actiu">Carbó Actiu</option>
+                  <option value="Cotó">Cotó</option>
+                </select>
+              </div>
+              <div class="flex items-center justify-between gap-2">
+                <span class="font-bold text-gray-600">Capa 2:</span>
+                <select id="layer-2" onchange="updateFilterVisual()" class="border p-1 rounded bg-white w-40">
+                  <option value="Sorra Gruixuda" selected>Sorra Gruixuda</option>
+                  <option value="Grava">Grava</option>
+                  <option value="Sorra Fina">Sorra Fina</option>
+                  <option value="Carbó Actiu">Carbó Actiu</option>
+                  <option value="Cotó">Cotó</option>
+                </select>
+              </div>
+              <div class="flex items-center justify-between gap-2">
+                <span class="font-bold text-gray-600">Capa 3:</span>
+                <select id="layer-3" onchange="updateFilterVisual()" class="border p-1 rounded bg-white w-40">
+                  <option value="Sorra Fina" selected>Sorra Fina</option>
+                  <option value="Grava">Grava</option>
+                  <option value="Sorra Gruixuda">Sorra Gruixuda</option>
+                  <option value="Carbó Actiu">Carbó Actiu</option>
+                  <option value="Cotó">Cotó</option>
+                </select>
+              </div>
+              <div class="flex items-center justify-between gap-2">
+                <span class="font-bold text-gray-600">Capa 4:</span>
+                <select id="layer-4" onchange="updateFilterVisual()" class="border p-1 rounded bg-white w-40">
+                  <option value="Carbó Actiu" selected>Carbó Actiu</option>
+                  <option value="Grava">Grava</option>
+                  <option value="Sorra Gruixuda">Sorra Gruixuda</option>
+                  <option value="Sorra Fina">Sorra Fina</option>
+                  <option value="Cotó">Cotó</option>
+                </select>
+              </div>
+              <div class="flex items-center justify-between gap-2">
+                <span class="font-bold text-gray-600">Capa 5 (Baix):</span>
+                <select id="layer-5" onchange="updateFilterVisual()" class="border p-1 rounded bg-white w-40">
+                  <option value="Cotó" selected>Cotó (Filtre fi)</option>
+                  <option value="Grava">Grava</option>
+                  <option value="Sorra Gruixuda">Sorra Gruixuda</option>
+                  <option value="Carbó Actiu">Carbó Actiu</option>
+                </select>
+              </div>
+            </div>
+
+            <button onclick="testWaterFilter()" class="w-full mt-2 bg-forest-500 hover:bg-forest-600 text-white font-bold py-1.5 rounded transition-all">
+              💧 Provar Filtratge d'Aigua
+            </button>
+          </div>
+
+          <!-- Graphic representation -->
+          <div class="bg-forest-50/50 p-4 rounded-xl border border-forest-200 text-center flex flex-col items-center">
+            <div class="text-xs font-bold text-gray-700 mb-2">Esquema del Prototip del Filtre</div>
+            <div class="w-36 bg-gray-200 rounded-t-lg border-2 border-gray-400 overflow-hidden flex flex-col shadow-inner">
+              <div id="vis-layer-1" class="h-6 bg-stone-300 text-[10px] flex items-center justify-center font-bold text-gray-700">Grava</div>
+              <div id="vis-layer-2" class="h-6 bg-amber-200 text-[10px] flex items-center justify-center font-bold text-gray-800">Sorra G.</div>
+              <div id="vis-layer-3" class="h-6 bg-amber-100 text-[10px] flex items-center justify-center font-bold text-gray-800">Sorra F.</div>
+              <div id="vis-layer-4" class="h-6 bg-gray-800 text-[10px] flex items-center justify-center font-bold text-white">Carbó</div>
+              <div id="vis-layer-5" class="h-6 bg-white text-[10px] flex items-center justify-center font-bold text-gray-600">Cotó</div>
+            </div>
+            <div class="w-12 h-6 border-x-2 border-b-2 border-gray-400 bg-blue-100/40 rounded-b-md"></div>
+            <div id="filter-result-msg" class="text-xs font-bold text-forest-700 mt-3">
+              Prem "Provar Filtratge" per veure la claredat de l'aigua.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: TRIMESTRE 2 ==================== -->
+    <section id="tab-t2" class="tab-content hidden space-y-6">
+      <!-- Intro Paragraph -->
+      <div class="bg-ocean-50 p-6 rounded-2xl border border-ocean-500/20 shadow-sm">
+        <h2 class="text-2xl font-bold text-ocean-700 flex items-center gap-2">
+          <span>🔵</span> TRIMESTRE 2: "Ruta submarina: Robòtica per protegir la Posidònia"
+        </h2>
+        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+          En aquest segon trimestre explorem la biodiversitat marina de les cales de Palafrugell (Calella, Llafranc i Tamariu) i la importància vital de la <em>Posidonia oceanica</em>. Dissenyarem, muntarem i programarem un robot vaixell autònom capaç de patrullar la costa i detectar àrees protegides per evitar l'ancoratge incontrolat d'embarcacions.
+        </p>
+      </div>
+
+      <!-- FITXA 1: Biodiversitat Marina -->
+      <div id="t2-fitxa1" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+        <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
+          <span>📌 FITXA 1: La biodiversitat de les nostres cales</span>
+          <span class="text-xs font-normal text-gray-500">Sessió 1 i 2</span>
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div class="space-y-2">
+            <label class="font-bold text-gray-800 block">1. Observació de la Posidònia oceanica:</label>
+            <p class="text-gray-600">És una àlga o una planta marina? Com ho sabem?</p>
+            <textarea rows="2" placeholder="És una planta marina perquè té arrels, tija, fulles, flors i fruita..." class="w-full p-2 border rounded bg-white outline-none focus:border-ocean-500"></textarea>
+
+            <p class="text-gray-600 mt-2">Anotacions de l'observació de l'egagròpila (bola de la platja):</p>
+            <textarea rows="2" placeholder="Les boles estan fetes de les fibres de les fulles de Posidònia que el mar enrotlla..." class="w-full p-2 border rounded bg-white outline-none focus:border-ocean-500"></textarea>
+          </div>
+
+          <!-- Comparació visual -->
+          <div class="bg-ocean-50/60 p-3 rounded-xl border border-ocean-200 space-y-2">
+            <span class="font-bold text-ocean-900 block">2. Dibuix comparatiu del fons marí:</span>
+            <div class="grid grid-cols-2 gap-2 text-center text-[11px]">
+              <div class="bg-white p-2 rounded border border-emerald-300">
+                <div class="font-bold text-emerald-800 mb-1">🌿 Praderia Sana</div>
+                <div class="h-20 bg-emerald-100 rounded flex items-center justify-center text-emerald-700 text-[10px] font-semibold">
+                  Aigua clara, peixos, xarxa d'arrels.
+                </div>
+              </div>
+              <div class="bg-white p-2 rounded border border-red-300">
+                <div class="font-bold text-red-800 mb-1">⚓ Fons Destruït</div>
+                <div class="h-20 bg-amber-100 rounded flex items-center justify-center text-red-700 text-[10px] font-semibold">
+                  Sòl desnudat per àncores, aigua tèrbola.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FITXA 2: Programació Scratch-like Block Builder -->
+      <div id="t2-fitxa2" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+        <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
+          <span>💻 FITXA 2: Pensament Computacional – Algorisme de Navegació</span>
+          <span class="text-xs font-normal text-gray-500">Sessió 5 i 7</span>
+        </h3>
+
+        <p class="text-xs text-gray-600">
+          Programa el comportament del robot vaixell perquè patrulli la línia de costa i emeti un avís sonor/lumínic en detectar el color verd de la Posidònia:
+        </p>
+
+        <div class="bg-gray-900 p-4 rounded-xl text-white space-y-3 text-xs">
+          <div class="flex items-center justify-between border-b border-gray-700 pb-2">
+            <span class="font-bold text-amber-400 font-heading">🧩 Constructor de Blocs de Programació</span>
+            <button onclick="testRobotAlgorithm()" class="bg-ocean-500 hover:bg-ocean-600 text-white font-bold px-3 py-1 rounded">
+              ▶️ Executar Simulació
+            </button>
+          </div>
+
+          <div class="space-y-2">
+            <!-- Event Start -->
+            <div class="bg-emerald-600 p-2 rounded-lg font-mono flex items-center gap-2">
+              <span>🟢 EN INICIAR:</span>
+              <span>Avançar a velocitat</span>
+              <input type="number" id="robot-speed" value="50" min="10" max="100" class="w-14 px-1 rounded text-black font-bold text-center">
+              <span>%</span>
+            </div>
+
+            <!-- Loop block -->
+            <div class="bg-amber-600/90 p-3 rounded-lg font-mono space-y-2 ml-3 border-l-4 border-amber-400">
+              <div class="font-bold">🔄 PER SEMPRE (Bucle principal):</div>
+              <div class="bg-blue-600 p-2 rounded font-mono ml-3 space-y-1">
+                <div>SI (Sensor de Color == <span class="bg-emerald-800 text-emerald-200 px-1 rounded">VERD / Posidònia</span>) LLAVORS:</div>
+                <div class="ml-4 space-y-1 text-emerald-100 text-[11px]">
+                  <div>• Aturar motors immediatament.</div>
+                  <div>• Encendre Llum LED 🔴 Vermella.</div>
+                  <div>• Emetre so d'alerta: 🔊 "Atenció! Zona protegida".</div>
+                  <div class="flex items-center gap-1">
+                    <span>• Esperar</span>
+                    <input type="number" id="robot-wait" value="3" class="w-10 px-1 rounded text-black font-bold text-center">
+                    <span>segons i girar a la dreta vers la boia.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="bg-blue-800 p-1.5 rounded font-mono ml-3 text-[11px] text-blue-200">
+                SINO: Continuar avançant i encendre llum LED 🟢 Verda.
+              </div>
+            </div>
+          </div>
+
+          <div id="robot-output" class="p-2 bg-black/50 rounded font-mono text-xs text-amber-300">
+            Estat: Algorisme a punt. Prem "Executar Simulació" per provar el codi.
+          </div>
+        </div>
+      </div>
+
+      <!-- FITXA 3: Debugging i Muntatge -->
+      <div id="t2-fitxa3" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+        <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
+          <span>🛠️ FITXA 3: Registre de Depuració d'Errors (Debugging)</span>
+          <span class="text-xs font-normal text-gray-500">Sessió 6 i 10</span>
+        </h3>
+
+        <div class="overflow-x-auto text-xs">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-ocean-50 text-ocean-900 border-b">
+                <th class="p-2">Quin error ha tingut el robot?</th>
+                <th class="p-2">Per què passava?</th>
+                <th class="p-2">Com ho hem solucionat?</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y text-gray-700">
+              <tr>
+                <td class="p-2"><input type="text" value="El robot no parava al detectar verd" class="w-full p-1 border rounded bg-gray-50"></td>
+                <td class="p-2"><input type="text" value="El sensor de color estava massa alt" class="w-full p-1 border rounded bg-gray-50"></td>
+                <td class="p-2"><input type="text" value="Hem baixat la posició del sensor 1 cm" class="w-full p-1 border rounded bg-gray-50"></td>
+              </tr>
+              <tr>
+                <td class="p-2"><input type="text" placeholder="Error 1 del teu equip..." class="w-full p-1 border rounded"></td>
+                <td class="p-2"><input type="text" placeholder="Causa de l'error..." class="w-full p-1 border rounded"></td>
+                <td class="p-2"><input type="text" placeholder="Solució aplicada..." class="w-full p-1 border rounded"></td>
+              </tr>
+              <tr>
+                <td class="p-2"><input type="text" placeholder="Error 2 del teu equip..." class="w-full p-1 border rounded"></td>
+                <td class="p-2"><input type="text" placeholder="Causa de l'error..." class="w-full p-1 border rounded"></td>
+                <td class="p-2"><input type="text" placeholder="Solució aplicada..." class="w-full p-1 border rounded"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: TRIMESTRE 3 ==================== -->
+    <section id="tab-t3" class="tab-content hidden space-y-6">
+      <!-- Intro Paragraph -->
+      <div class="bg-cork-50 p-6 rounded-2xl border border-cork-500/20 shadow-sm">
+        <h2 class="text-2xl font-bold text-cork-700 flex items-center gap-2">
+          <span>🟡</span> TRIMESTRE 3: "D'alzina a tap: La història del suro a Palafrugell"
+        </h2>
+        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+          En aquest darrer bloc connectem amb el patrimoni industrial i la identitat de Palafrugell. Analitzarem les propietats científiques del suro (flotabilitat, impermeabilitat i aïllament) en comparació amb altres materials, investigarem la sortida al Museu del Suro i Can Mario, i crearem un guió per a l'àudio-guia del nostre Museu Pop-Up.
+        </p>
+      </div>
+
+      <!-- FITXA 1: Laboratori de Propietats Físiques del Suro -->
+      <div id="t3-fitxa1" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+        <h3 class="font-bold text-cork-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
+          <span>🧪 FITXA 1: Laboratori de Propietats Físiques del Suro</span>
+          <span class="text-xs font-normal text-gray-500">Sessió 4</span>
+        </h3>
+
+        <p class="text-xs text-gray-600">
+          Realitza les proves de laboratori i compara el Suro amb el Plàstic i el Vidre:
+        </p>
+
+        <!-- Material Properties Table -->
+        <div class="overflow-x-auto text-xs">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-cork-50 text-cork-900 border-b">
+                <th class="p-2">Propietat Física</th>
+                <th class="p-2 font-bold text-cork-800">🪵 Suro</th>
+                <th class="p-2 font-bold text-blue-800">🥤 Plàstic</th>
+                <th class="p-2 font-bold text-emerald-800">🫙 Vidre</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y text-gray-700">
+              <tr>
+                <td class="p-2 font-bold">Flotabilitat (Flota o s'enfonsa?)</td>
+                <td class="p-2"><select class="p-1 border rounded bg-amber-50 w-full"><option>Flota molt bé</option><option>S'enfonsa</option></select></td>
+                <td class="p-2"><select class="p-1 border rounded bg-blue-50 w-full"><option>Flota</option><option>S'enfonsa</option></select></td>
+                <td class="p-2"><select class="p-1 border rounded bg-emerald-50 w-full"><option>S'enfonsa</option><option>Flota</option></select></td>
+              </tr>
+              <tr>
+                <td class="p-2 font-bold">Impermeabilitat (Deixa passar aigua?)</td>
+                <td class="p-2"><select class="p-1 border rounded bg-amber-50 w-full"><option>Impermeable (No passsa)</option><option>Permeable</option></select></td>
+                <td class="p-2"><select class="p-1 border rounded bg-blue-50 w-full"><option>Impermeable</option><option>Permeable</option></select></td>
+                <td class="p-2"><select class="p-1 border rounded bg-emerald-50 w-full"><option>Impermeable</option><option>Permeable</option></select></td>
+              </tr>
+              <tr>
+                <td class="p-2 font-bold">Aïllament Tèrmic (Aïlla calor/fred?)</td>
+                <td class="p-2"><select class="p-1 border rounded bg-amber-50 w-full"><option>Excel·lent aïllant</option><option>Malt aïllant</option></select></td>
+                <td class="p-2"><select class="p-1 border rounded bg-blue-50 w-full"><option>Mitjà</option><option>Bo</option></select></td>
+                <td class="p-2"><select class="p-1 border rounded bg-emerald-50 w-full"><option>Mal aïllant</option><option>Bo</option></select></td>
+              </tr>
+              <tr>
+                <td class="p-2 font-bold">Biodegradabilitat (Natural?)</td>
+                <td class="p-2"><select class="p-1 border rounded bg-amber-50 w-full"><option>Sí (100% Natural)</option><option>No</option></select></td>
+                <td class="p-2"><select class="p-1 border rounded bg-blue-50 w-full"><option>No (Contamina)</option><option>Sí</option></select></td>
+                <td class="p-2"><select class="p-1 border rounded bg-emerald-50 w-full"><option>No (Reciclable)</option><option>Sí</option></select></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="bg-cork-50/70 p-3 rounded-xl border border-cork-200 text-xs">
+          <label class="font-bold text-cork-900 block mb-1">💡 Conclusió científica:</label>
+          <textarea rows="2" placeholder="El suro és un material ideal per als taps i la construcció sostenible perquè..." class="w-full p-2 border rounded bg-white outline-none focus:border-cork-500"></textarea>
+        </div>
+      </div>
+
+      <!-- FITXA 2: Guió per a l'Àudio-Guia -->
+      <div id="t3-fitxa2" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+        <h3 class="font-bold text-cork-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
+          <span>🎙️ FITXA 2: Guió per a l'Àudio-guia del Museu Pop-Up</span>
+          <span class="text-xs font-normal text-gray-500">Sessió 7 i 9</span>
+        </h3>
+
+        <div class="space-y-3 text-xs">
+          <div>
+            <label class="font-bold text-gray-800 block mb-1">Títol de la nostra parada del museu:</label>
+            <input type="text" id="script-title" placeholder="Ex: La pelada del suro a les Gavarres / Can Mario" class="w-full p-2 border rounded bg-white outline-none font-bold text-cork-900">
+          </div>
+
+          <div>
+            <label class="font-bold text-gray-800 block mb-1">Text del guió (El que direu a l'enregistrament):</label>
+            <textarea id="script-body" rows="4" class="w-full p-2 border rounded bg-amber-50/30 outline-none leading-relaxed" placeholder="Hola! Benvinguts a la nostra parada sobre el suro a Palafrugell..."></textarea>
+          </div>
+
+          <!-- Speech Player -->
+          <div class="flex items-center gap-2 bg-gray-50 p-2.5 rounded-lg border">
+            <button onclick="playAudioGuideScript()" class="bg-cork-500 hover:bg-cork-600 text-white font-bold px-3 py-1.5 rounded transition-all flex items-center gap-1">
+              🔊 Escoltar Guió en Veu Alta (TTS)
+            </button>
+            <span id="speech-status" class="text-gray-500 italic text-[11px]">Prem per provar la lectura del guió.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 4: AVALUA'T ==================== -->
+    <section id="tab-eval" class="tab-content hidden space-y-6">
+      <!-- Intro Paragraph -->
+      <div class="bg-purple-50 p-6 rounded-2xl border border-purple-500/20 shadow-sm">
+        <h2 class="text-2xl font-bold text-purple-800 flex items-center gap-2">
+          <span>🎯</span> AVALUACIÓ I REFLEXIÓ FINAL DEL CURS
+        </h2>
+        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+          L'avaluació en el nostre Diari Científic ens ajuda a aprendre i millorar junts. A través de la Diana de Coavaluació, l'equip cooperatiu analitza com ha funcionat el treball en grup, i en l'autoavaluació personal cada alumne/a reflexiona sobre el seu progrés com a investigador/a i dissenyador/a Maker a Palafrugell.
+        </p>
+      </div>
+
+      <!-- DIANA DE COAVALUACIÓ RADAR CHART -->
+      <div class="bg-white p-5 rounded-2xl border border-purple-100 shadow-sm space-y-4">
+        <h3 class="font-bold text-purple-900 font-heading text-lg border-b pb-2 flex items-center justify-between">
+          <span>🌟 Diana de Coavaluació del Treball en Equip</span>
+          <span class="text-xs font-normal text-purple-600 font-semibold">Puntua d'1 a 4 cada eix</span>
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+          <!-- Sliders -->
+          <div class="space-y-3 text-xs bg-purple-50/50 p-4 rounded-xl border border-purple-200">
+            <div>
+              <div class="flex justify-between font-bold text-purple-900 mb-1">
+                <span>1. Compliment de Rols:</span>
+                <span id="val-axis1" class="text-purple-700 font-heading text-sm">4</span>
+              </div>
+              <input type="range" id="slider-axis1" min="1" max="4" value="4" oninput="updateRadarChart()" class="w-full accent-purple-600">
+            </div>
+
+            <div>
+              <div class="flex justify-between font-bold text-purple-900 mb-1">
+                <span>2. Gestió del Temps:</span>
+                <span id="val-axis2" class="text-purple-700 font-heading text-sm">3</span>
+              </div>
+              <input type="range" id="slider-axis2" min="1" max="4" value="3" oninput="updateRadarChart()" class="w-full accent-purple-600">
+            </div>
+
+            <div>
+              <div class="flex justify-between font-bold text-purple-900 mb-1">
+                <span>3. Ajuda i Cooperació:</span>
+                <span id="val-axis3" class="text-purple-700 font-heading text-sm">4</span>
+              </div>
+              <input type="range" id="slider-axis3" min="1" max="4" value="4" oninput="updateRadarChart()" class="w-full accent-purple-600">
+            </div>
+
+            <div>
+              <div class="flex justify-between font-bold text-purple-900 mb-1">
+                <span>4. Respecte i Escolta:</span>
+                <span id="val-axis4" class="text-purple-700 font-heading text-sm">3</span>
+              </div>
+              <input type="range" id="slider-axis4" min="1" max="4" value="3" oninput="updateRadarChart()" class="w-full accent-purple-600">
+            </div>
+          </div>
+
+          <!-- Chart.js Radar Canvas -->
+          <div class="chart-container">
+            <canvas id="dianaChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- AUTOAVALUACIÓ PERSONAL -->
+      <div class="bg-white p-5 rounded-2xl border border-purple-100 shadow-sm space-y-4 text-xs">
+        <h3 class="font-bold text-purple-900 font-heading text-lg border-b pb-2">
+          📝 Autoavaluació Personal de l'Alumne/a
+        </h3>
+
+        <div class="space-y-3">
+          <div>
+            <label class="font-bold text-gray-800 block mb-1">El que més m'ha agradat aprendre aquest curs a 4t és:</label>
+            <textarea id="eval-reflection-1" rows="2" placeholder="M'ha agradat molt programar el robot vaixell i descobrir la Posidònia..." class="w-full p-2 border rounded bg-white outline-none focus:border-purple-500"></textarea>
+          </div>
+
+          <div>
+            <label class="font-bold text-gray-800 block mb-1">Una millora que he fet com a investigador/a o dissenyador/a Maker:</label>
+            <textarea id="eval-reflection-2" rows="2" placeholder="Ara sé organitzar els materials i solucionar els errors de codi sense frustrar-me..." class="w-full p-2 border rounded bg-white outline-none focus:border-purple-500"></textarea>
+          </div>
+
+          <div>
+            <label class="font-bold text-gray-800 block mb-1">Com he ajudat al meu poble (Palafrugell) amb els nostres projectes:</label>
+            <textarea id="eval-reflection-3" rows="2" placeholder="Hem ensenyat a protegir les Gavarres, el fons marí i el nostre patrimoni del suro..." class="w-full p-2 border rounded bg-white outline-none focus:border-purple-500"></textarea>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 pt-2 border-t">
+          <button onclick="saveEvaluation()" class="bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
+            💾 Desar la meva avaluació
+          </button>
+          <span id="eval-save-status" class="text-[11px] text-gray-500"></span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-sand/80 border-t border-amber-200 py-4 text-center text-xs text-gray-600 no-print">
+    <div class="max-w-6xl mx-auto px-4">
+      <p class="font-bold text-amber-900">🔬 Diari Científic i Maker — 4t de Primària</p>
+      <p class="text-[11px] mt-0.5">Projecte Educatiu Ecosocial i Tecnològic — Escola Vedruna - Prats de la Carrera</p>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // ==================== ID DE L'INVESTIGADOR/A OBLIGATORI ====================
+    const NAME_STORAGE_KEY = 'diari-student-name';
+    const GATED_TABS = ['seguiment', 't1', 't2', 't3', 'eval'];
+    let nameInputTimer = null;
+
+    function loadStudentName() {
+      try {
+        const saved = localStorage.getItem(NAME_STORAGE_KEY);
+        if (saved) {
+          document.getElementById('student-name').value = saved;
+        }
+      } catch (e) {
+        // Encara no hi ha cap nom desat en aquest dispositiu
+      }
+      applyIdGate();
+    }
+
+    function onStudentNameInput() {
+      applyIdGate();
+      clearTimeout(nameInputTimer);
+      nameInputTimer = setTimeout(() => {
+        try {
+          localStorage.setItem(NAME_STORAGE_KEY, document.getElementById('student-name').value.trim());
+        } catch (e) {
+          // Es manté només en aquesta sessió del navegador
+        }
+      }, 500);
+    }
+
+    function goToEquipAndFocusName() {
+      switchTab('equip');
+      const input = document.getElementById('student-name');
+      input.focus();
+      input.classList.add('ring-2', 'ring-red-400');
+      setTimeout(() => input.classList.remove('ring-2', 'ring-red-400'), 1500);
+    }
+
+    function applyIdGate() {
+      const nameFilled = document.getElementById('student-name').value.trim().length > 0;
+
+      GATED_TABS.forEach(tabId => {
+        const section = document.getElementById('tab-' + tabId);
+        if (!section) return;
+        section.classList.add('relative');
+
+        let gate = section.querySelector(':scope > .id-gate-overlay');
+        if (!nameFilled) {
+          if (!gate) {
+            gate = document.createElement('div');
+            gate.className = 'id-gate-overlay absolute inset-0 z-40 flex flex-col items-center justify-center text-center bg-white/95 backdrop-blur-sm rounded-2xl p-6';
+            gate.innerHTML = `
+              <div class="text-4xl mb-3">🪪</div>
+              <div class="font-bold text-gray-800 text-base font-heading">Cal escriure el teu nom primer!</div>
+              <p class="text-xs text-gray-500 mt-1 max-w-xs">Per poder respondre en aquest diari, primer has d'escriure el teu nom a la pestanya "Equip".</p>
+              <button onclick="goToEquipAndFocusName()" class="mt-4 bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
+                👤 Anar a l'Equip i escriure el meu nom
+              </button>
+            `;
+            section.appendChild(gate);
+          }
+          gate.style.display = 'flex';
+        } else if (gate) {
+          gate.style.display = 'none';
+        }
+      });
+    }
+
+    // ==================== SISTEMA DE BLOQUEIG PROGRESSIU ====================
+    // Configuració de quina sessió desbloqueja cada fitxa dins de cada trimestre
+    const LOCK_CONFIG = {
+      t1: [
+        { id: 't1-fitxa1', session: 1, label: 'Fitxa 1: Hipòtesi' },
+        { id: 't1-fitxa2', session: 4, label: 'Fitxa 2: Simulador d\'Erosió' },
+        { id: 't1-fitxa3', session: 6, label: 'Fitxa 3: Taller del Filtre' }
+      ],
+      t2: [
+        { id: 't2-fitxa1', session: 1, label: 'Fitxa 1: Biodiversitat' },
+        { id: 't2-fitxa2', session: 5, label: 'Fitxa 2: Algorisme del Robot' },
+        { id: 't2-fitxa3', session: 6, label: 'Fitxa 3: Depuració d\'Errors' }
+      ],
+      t3: [
+        { id: 't3-fitxa1', session: 4, label: 'Fitxa 1: Laboratori del Suro' },
+        { id: 't3-fitxa2', session: 7, label: 'Fitxa 2: Guió Àudio-guia' }
+      ]
+    };
+    const TRIMESTER_ORDER = { t1: 1, t2: 2, t3: 3 };
+
+    let lockState = { unlockedTrimester: 1, sessionT1: 1, sessionT2: 1, sessionT3: 1 };
+
+    async function loadLockState() {
+      try {
+        const result = await fetchFromSheet('getConfig');
+        if (result && result.status === 'ok' && result.config && result.config.lockState) {
+          lockState = Object.assign({}, lockState, JSON.parse(result.config.lockState));
+        }
+      } catch (e) {
+        // No hi ha configuració desada encara, es fan servir els valors per defecte
+      }
+      syncConfigInputs();
+      applyLocks();
+    }
+
+    async function saveTeacherConfig() {
+      lockState = {
+        unlockedTrimester: parseInt(document.getElementById('cfg-trimester').value, 10),
+        sessionT1: parseInt(document.getElementById('cfg-session-t1').value, 10) || 1,
+        sessionT2: parseInt(document.getElementById('cfg-session-t2').value, 10) || 1,
+        sessionT3: parseInt(document.getElementById('cfg-session-t3').value, 10) || 1
+      };
+
+      const statusEl = document.getElementById('teacher-save-status');
+      statusEl.innerText = '⏳ Desant...';
+      try {
+        await postToSheet({ action: 'setConfig', key: 'lockState', value: JSON.stringify(lockState) });
+        statusEl.innerText = '✅ Configuració desada al full de càlcul.';
+      } catch (e) {
+        statusEl.innerText = '⚠️ No s\'ha pogut desar (es manté només en aquesta sessió del navegador).';
+      }
+      applyLocks();
+      setTimeout(() => { statusEl.innerText = ''; }, 4000);
+    }
+
+    function syncConfigInputs() {
+      document.getElementById('cfg-trimester').value = String(lockState.unlockedTrimester);
+      document.getElementById('cfg-session-t1').value = lockState.sessionT1;
+      document.getElementById('cfg-session-t2').value = lockState.sessionT2;
+      document.getElementById('cfg-session-t3').value = lockState.sessionT3;
+    }
+
+    const TEACHER_PASSWORD = 'STEAM1859';
+    let teacherAuthenticated = false;
+
+    function checkTeacherPassword() {
+      const input = document.getElementById('teacher-password-input');
+      const errorEl = document.getElementById('teacher-password-error');
+      if (input.value === TEACHER_PASSWORD) {
+        teacherAuthenticated = true;
+        document.getElementById('teacher-password-gate').classList.add('hidden');
+        document.getElementById('teacher-panel-content').classList.remove('hidden');
+        errorEl.innerText = '';
+        input.value = '';
+        syncConfigInputs();
+      } else {
+        errorEl.innerText = '❌ Contrasenya incorrecta.';
+        input.value = '';
+        input.focus();
+      }
+    }
+
+    function toggleTeacherPanel() {
+      const panel = document.getElementById('teacher-panel');
+      const icon = document.getElementById('teacher-toggle-icon');
+      panel.classList.toggle('hidden');
+      icon.innerText = panel.classList.contains('hidden') ? '▾' : '▴';
+
+      if (!panel.classList.contains('hidden') && !teacherAuthenticated) {
+        document.getElementById('teacher-password-gate').classList.remove('hidden');
+        document.getElementById('teacher-panel-content').classList.add('hidden');
+        setTimeout(() => document.getElementById('teacher-password-input').focus(), 50);
+      }
+    }
+
+    // ==================== SINCRONITZACIÓ AMB GOOGLE SHEETS (DRIVE) ====================
+    const SHEETS_WEBAPP_URL = 'https://script.google.com/a/macros/vedrunapalafrugell.org/s/AKfycbw7KnKNv4QrLCz9Kx_xa4JCvrYJSp--Ifyamih1G92a3tZXudDtqmm6x59jn6Zaa-o/exec';
+
+    // Lectura (GET): torna la resposta JSON llegible (config actual, historial...)
+    async function fetchFromSheet(action) {
+      if (!SHEETS_WEBAPP_URL) return null;
+      const response = await fetch(SHEETS_WEBAPP_URL + '?action=' + encodeURIComponent(action));
+      return await response.json();
+    }
+
+    // Escriptura amb confirmació (POST): s'espera la resposta per saber si ha anat bé
+    async function postToSheet(payload) {
+      if (!SHEETS_WEBAPP_URL) throw new Error('No configurat');
+      const response = await fetch(SHEETS_WEBAPP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+      const result = await response.json();
+      if (result.status !== 'ok') throw new Error(result.message || 'Error desconegut');
+      return result;
+    }
+
+    // Escriptura ràpida "dispara i oblida" per afegir una fila (Seguiment, Avaluacio)
+    function sendToSheet(sheetName, headers, row) {
+      postToSheet({ sheet: sheetName, headers: headers, row: row }).catch(() => {
+        // Sense connexió o error puntual: no bloquegem la interfície de l'alumne
+      });
+    }
+
+    // ==================== REGISTRE DE SEGUIMENT PER SESSIÓ ====================
+    let sessionLog = [];
+    let currentLogMood = 'verd';
+
+    const MOOD_ICON = { verd: '🟢', groc: '🟡', vermell: '🔴' };
+    const TRIMESTER_LABEL = { t1: 'T1: Gavarres', t2: 'T2: Posidònia', t3: 'T3: Suro' };
+
+    function setLogMood(mood, btnEl) {
+      currentLogMood = mood;
+      document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('ring-2', 'ring-offset-1', 'ring-slate-500', 'bg-slate-100'));
+      btnEl.classList.add('ring-2', 'ring-offset-1', 'ring-slate-500', 'bg-slate-100');
+    }
+
+    async function loadSessionLog() {
+      const listEl = document.getElementById('log-list');
+      try {
+        const result = await fetchFromSheet('getSeguiment');
+        if (result && result.status === 'ok' && result.rows) {
+          sessionLog = result.rows.map((row, idx) => ({
+            id: 'row-' + idx,
+            dateLabel: row['Data i hora'],
+            trimesterLabel: row['Trimestre'],
+            session: row['Sessió'],
+            moodIcon: row['Estat'],
+            note: row['Anotació']
+          })).reverse(); // El full guarda de més antic a més recent; aquí ho volem al revés
+        }
+      } catch (e) {
+        if (listEl) listEl.innerHTML = '<p class="text-amber-600 italic">⚠️ No s\'ha pogut carregar l\'historial des del full de càlcul ara mateix.</p>';
+        return;
+      }
+      renderSessionLog();
+    }
+
+    async function addSessionLog() {
+      const trimester = document.getElementById('log-trimester').value;
+      const session = parseInt(document.getElementById('log-session').value, 10) || 1;
+      const note = document.getElementById('log-note').value.trim();
+      const now = new Date();
+      const dateLabel = now.toLocaleDateString('ca-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }) +
+                         ' · ' + now.toLocaleTimeString('ca-ES', { hour: '2-digit', minute: '2-digit' });
+
+      const statusEl = document.getElementById('log-add-status');
+      statusEl.innerText = '⏳ Desant...';
+
+      try {
+        await postToSheet({
+          sheet: 'Seguiment',
+          headers: ['Data i hora', 'Trimestre', 'Sessió', 'Estat', 'Anotació'],
+          row: [dateLabel, TRIMESTER_LABEL[trimester] || trimester, session, MOOD_ICON[currentLogMood], note]
+        });
+        statusEl.innerText = '✅ Registre afegit i desat al full de càlcul.';
+        document.getElementById('log-note').value = '';
+        await loadSessionLog();
+      } catch (e) {
+        statusEl.innerText = '⚠️ No s\'ha pogut desar. Comprova la connexió i torna-ho a provar.';
+      }
+      setTimeout(() => { statusEl.innerText = ''; }, 4000);
+    }
+
+    function renderSessionLog() {
+      const listEl = document.getElementById('log-list');
+      const countEl = document.getElementById('log-count');
+      if (!listEl || !countEl) return;
+
+      countEl.innerText = sessionLog.length + (sessionLog.length === 1 ? ' registre' : ' registres');
+
+      if (sessionLog.length === 0) {
+        listEl.innerHTML = '<p class="text-gray-400 italic">Encara no hi ha cap registre. Afegeix-ne un des del formulari de dalt.</p>';
+        return;
+      }
+
+      listEl.innerHTML = sessionLog.map(entry => `
+        <div class="flex items-start gap-3 p-3 rounded-xl border border-gray-200 bg-gray-50">
+          <div class="text-xl leading-none pt-0.5">${entry.moodIcon || '🟢'}</div>
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="font-bold text-slate-800">${entry.trimesterLabel}</span>
+              <span class="text-gray-400">·</span>
+              <span class="font-semibold text-gray-600">Sessió ${entry.session}</span>
+              <span class="text-gray-400">·</span>
+              <span class="text-gray-500">${entry.dateLabel}</span>
+            </div>
+            ${entry.note ? `<p class="text-gray-700 mt-1">${escapeHtml(entry.note)}</p>` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.innerText = str;
+      return div.innerHTML;
+    }
+
+    function applyLocks() {
+      // Bloqueig de pestanyes T2 / T3
+      ['t2', 't3'].forEach(tKey => {
+        const btn = document.getElementById('btn-' + tKey);
+        if (!btn) return;
+        const isUnlocked = TRIMESTER_ORDER[tKey] <= lockState.unlockedTrimester;
+        if (isUnlocked) {
+          btn.classList.remove('opacity-40', 'cursor-not-allowed');
+          btn.dataset.locked = 'false';
+          btn.innerText = btn.innerText.replace('🔒 ', '');
+        } else {
+          btn.classList.add('opacity-40', 'cursor-not-allowed');
+          btn.dataset.locked = 'true';
+          if (!btn.innerText.startsWith('🔒 ')) btn.innerText = '🔒 ' + btn.innerText.trim();
+        }
+      });
+
+      // Bloqueig de fitxes dins de cada trimestre desbloquejat
+      Object.keys(LOCK_CONFIG).forEach(tKey => {
+        const sessionValue = lockState['session' + tKey.toUpperCase()];
+        LOCK_CONFIG[tKey].forEach(fitxa => {
+          const el = document.getElementById(fitxa.id);
+          if (!el) return;
+          const locked = fitxa.session > sessionValue;
+          renderLockOverlay(el, locked, fitxa);
+        });
+      });
+    }
+
+    function renderLockOverlay(el, locked, fitxa) {
+      let overlay = el.querySelector('.lock-overlay');
+      if (locked) {
+        el.classList.add('overflow-hidden');
+        if (!overlay) {
+          overlay = document.createElement('div');
+          overlay.className = 'lock-overlay absolute inset-0 z-10 flex flex-col items-center justify-center text-center bg-white/90 backdrop-blur-sm rounded-2xl border-2 border-dashed border-gray-300 p-4';
+          el.appendChild(overlay);
+        }
+        overlay.innerHTML = `
+          <div class="text-3xl mb-2">🔒</div>
+          <div class="font-bold text-gray-700 text-sm font-heading">${fitxa.label}</div>
+          <div class="text-xs text-gray-500 mt-1">Es desbloquejarà a la Sessió ${fitxa.session}</div>
+        `;
+        overlay.style.display = 'flex';
+        el.querySelectorAll('input, textarea, select, button').forEach(child => {
+          if (!overlay.contains(child)) child.setAttribute('tabindex', '-1');
+        });
+      } else {
+        if (overlay) overlay.style.display = 'none';
+        el.querySelectorAll('input, textarea, select, button').forEach(child => {
+          if (!overlay || !overlay.contains(child)) child.removeAttribute('tabindex');
+        });
+      }
+    }
+
+    // Tab switching logic
+    function switchTab(tabId) {
+      // Impedeix entrar a una pestanya de trimestre encara bloquejada
+      if ((tabId === 't2' || tabId === 't3') && TRIMESTER_ORDER[tabId] > lockState.unlockedTrimester) {
+        alert('🔒 Encara no ha arribat aquest trimestre. La persona docent l\'ha de desbloquejar des del Panell del Docent.');
+        return;
+      }
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(el => {
+        el.classList.remove('bg-amber-500', 'bg-forest-500', 'bg-ocean-500', 'bg-cork-500', 'bg-purple-600', 'text-white');
+        el.classList.add('bg-white');
+      });
+
+      const targetTab = document.getElementById('tab-' + tabId);
+      const targetBtn = document.getElementById('btn-' + tabId);
+
+      if (targetTab && targetBtn) {
+        targetTab.classList.remove('hidden');
+        targetBtn.classList.remove('bg-white');
+        targetBtn.classList.add('text-white');
+
+        if (tabId === 'equip') targetBtn.classList.add('bg-amber-500');
+        if (tabId === 't1') targetBtn.classList.add('bg-forest-500');
+        if (tabId === 't2') targetBtn.classList.add('bg-ocean-500');
+        if (tabId === 't3') targetBtn.classList.add('bg-cork-500');
+        if (tabId === 'seguiment') targetBtn.classList.add('bg-slate-600');
+        if (tabId === 'eval') {
+          targetBtn.classList.add('bg-purple-600');
+          initRadarChart();
+        }
+        if (tabId === 't1' || tabId === 't2' || tabId === 't3') {
+          applyLocks();
+        }
+        applyIdGate();
+      }
+    }
+
+    // Role selection details
+    const roleMissions = {
+      coordinador: "💬 **Coordinador/a:** La teva missió avui és donar el torn de paraula, assegurar-te que tothom participa i controlar el rellotge de la classe.",
+      secretari: "📝 **Secretari/a Científic/a:** La teva missió és comprovar que tots els membres de l'equip reomplin el Diari i anotar les conclusions acordades.",
+      material: "📦 **Responsable de Material:** La teva missió és anar a cercar les caixes d'experiments, cuidar les eines i deixar la taula ben neta al final.",
+      enginyer: "💻 **Enginyer/a Maker:** La teva missió és supervisar el muntatge físic del prototip, el codi de programació i solucionar les fallades tècniques.",
+      portaveu: "📢 **Portaveu:** La teva missió és comunicar les hipòtesis i descobriments de l'equip a la resta de grups i en el congrés."
+    };
+
+    function selectRole(roleKey) {
+      document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('ring-4', 'ring-amber-400', 'bg-amber-200'));
+      const activeBtn = document.getElementById('role-' + roleKey);
+      if (activeBtn) activeBtn.classList.add('ring-4', 'ring-amber-400', 'bg-amber-200');
+
+      const feedback = document.getElementById('role-feedback');
+      feedback.classList.remove('hidden');
+      feedback.innerHTML = roleMissions[roleKey] || '';
+    }
+
+    // ==================== T1: EROSION SIMULATOR ====================
+    let rainAnimId = null;
+    let rainProgress = 0;
+
+    function startRainSimulation() {
+      const canvas = document.getElementById('erosionCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      rainProgress = 0;
+
+      if (rainAnimId) cancelAnimationFrame(rainAnimId);
+
+      function draw() {
+        rainProgress += 0.01;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw 3 Soil Bottles
+        const bottleWidth = 160;
+        const bottleHeight = 100;
+
+        const bottles = [
+          { x: 20, title: 'A: Vegetació', soilColor: '#3B7A57', waterColor: '#E0F2FE', dirtLevel: 5 },
+          { x: 220, title: 'B: Sòl Nua', soilColor: '#8C5C1E', waterColor: '#B45309', dirtLevel: 35 },
+          { x: 420, title: 'C: Cremat + Cendra', soilColor: '#1F2937', waterColor: '#111827', dirtLevel: 80 }
+        ];
+
+        bottles.forEach((b) => {
+          // Label
+          ctx.fillStyle = '#FFFFFF';
+          ctx.font = 'bold 12px Quicksand';
+          ctx.fillText(b.title, b.x + 20, 25);
+
+          // Inclined Bottle body
+          ctx.fillStyle = '#374151';
+          ctx.fillRect(b.x, 50, bottleWidth, bottleHeight);
+
+          // Soil inside
+          ctx.fillStyle = b.soilColor;
+          ctx.fillRect(b.x + 5, 55, bottleWidth - 10, bottleHeight - 10);
+
+          // Raindrops effect
+          if (rainProgress < 1) {
+            ctx.fillStyle = '#60A5FA';
+            for (let i = 0; i < 6; i++) {
+              const rx = b.x + 10 + Math.random() * (bottleWidth - 20);
+              const ry = 40 + (Math.random() * 40);
+              ctx.fillRect(rx, ry, 2, 8);
+            }
+          }
+
+          // Water Collection Flask below
+          const currentWaterHeight = Math.min(60, rainProgress * (b.dirtLevel + 20));
+          ctx.strokeStyle = '#9CA3AF';
+          ctx.lineWidth = 2;
+          ctx.strokeRect(b.x + 45, 160, 70, 50);
+
+          // Water level
+          ctx.fillStyle = b.waterColor;
+          ctx.fillRect(b.x + 47, 210 - currentWaterHeight, 66, currentWaterHeight);
+        });
+
+        const statusMsg = document.getElementById('sim-status');
+        if (rainProgress < 1) {
+          statusMsg.innerText = "🌧️ Pluja de tardor caient sobre les Gavarres... Observa el recull d'aigua!";
+          rainAnimId = requestAnimationFrame(draw);
+        } else {
+          statusMsg.innerText = "✅ Simulació finalitzada! L'ampolla C (cremada) ha arrossegat molta cendra i aigua tèrbola.";
+        }
+      }
+
+      draw();
+    }
+
+    function resetRainSimulation() {
+      if (rainAnimId) cancelAnimationFrame(rainAnimId);
+      const canvas = document.getElementById('erosionCanvas');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+      document.getElementById('sim-status').innerText = 'Prem "Iniciar Simulació de Pluja" per veure l\'efecte sobre el sòl.';
+    }
+
+    // Filter UI sync
+    function updateFilterVisual() {
+      const colors = {
+        'Grava': { bg: 'bg-stone-300', text: 'text-gray-800' },
+        'Sorra Gruixuda': { bg: 'bg-amber-200', text: 'text-amber-900' },
+        'Sorra Fina': { bg: 'bg-amber-100', text: 'text-amber-900' },
+        'Carbó Actiu': { bg: 'bg-gray-800', text: 'text-white' },
+        'Cotó': { bg: 'bg-white', text: 'text-gray-600' }
+      };
+
+      for (let i = 1; i <= 5; i++) {
+        const val = document.getElementById('layer-' + i).value;
+        const layerEl = document.getElementById('vis-layer-' + i);
+        if (layerEl) {
+          layerEl.className = `h-6 ${colors[val].bg} ${colors[val].text} text-[10px] flex items-center justify-center font-bold`;
+          layerEl.innerText = val;
+        }
+      }
+    }
+
+    function testWaterFilter() {
+      const l1 = document.getElementById('layer-1').value;
+      const l5 = document.getElementById('layer-5').value;
+      const resultMsg = document.getElementById('filter-result-msg');
+
+      if (l1 === 'Grava' && l5 === 'Cotó') {
+        resultMsg.className = "text-xs font-bold text-forest-700 mt-3";
+        resultMsg.innerText = "✨ Felicitats! L'ordre és correcte. L'aigua tèrbola surt cristal·lina!";
+      } else {
+        resultMsg.className = "text-xs font-bold text-amber-700 mt-3";
+        resultMsg.innerText = "⚠️ L'aigua encara surt una mica tèrbola. Recorda posar els materials més grans (Grava) a dalt i el Cotó a baix de tot!";
+      }
+    }
+
+    // ==================== T2: ROBOT ALGORITHM SIMULATOR ====================
+    function testRobotAlgorithm() {
+      const speed = document.getElementById('robot-speed').value;
+      const waitTime = document.getElementById('robot-wait').value;
+      const output = document.getElementById('robot-output');
+
+      output.innerText = `🤖 Executant... Vaixell navegant al ${speed}% de velocitat... 🟢 Detectada Posidònia! ATURAT! 🔴 Llum vermella activa. 🔊 "Atenció! Zona protegida". Esperant ${waitTime} segons... Girant vers la boia blava de fondeig segur.`;
+    }
+
+    // ==================== T3: SPEECH SYNTHESIS PLAYER ====================
+    function playAudioGuideScript() {
+      const title = document.getElementById('script-title').value;
+      const body = document.getElementById('script-body').value;
+      const status = document.getElementById('speech-status');
+
+      if (!('speechSynthesis' in window)) {
+        alert("El teu navegador no suporta la lectura de veu automàtica.");
+        return;
+      }
+
+      window.speechSynthesis.cancel(); // stop current
+
+      const textToRead = `${title ? title + '. ' : ''} ${body || "Escriu el guió per poder-lo escoltar en veu alta."}`;
+      const utterance = new SpeechSynthesisUtterance(textToRead);
+      utterance.lang = 'ca-ES';
+
+      utterance.onstart = () => { status.innerText = "🔊 Reproduint l'àudio-guia..."; };
+      utterance.onend = () => { status.innerText = "✅ Enregistrament completat."; };
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    // ==================== TAB 4: RADAR CHART (Chart.js) ====================
+    let dianaChartInstance = null;
+
+    function initRadarChart() {
+      const canvas = document.getElementById('dianaChart');
+      if (!canvas) return;
+
+      const ctx = canvas.getContext('2d');
+
+      const v1 = parseFloat(document.getElementById('slider-axis1').value);
+      const v2 = parseFloat(document.getElementById('slider-axis2').value);
+      const v3 = parseFloat(document.getElementById('slider-axis3').value);
+      const v4 = parseFloat(document.getElementById('slider-axis4').value);
+
+      if (dianaChartInstance) dianaChartInstance.destroy();
+
+      dianaChartInstance = new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: [
+            '1. Rols Cooperatius',
+            '2. Gestió del Temps',
+            '3. Ajuda i Cooperació',
+            '4. Respecte i Escolta'
+          ],
+          datasets: [{
+            label: "Estrella de l'Equip",
+            data: [v1, v2, v3, v4],
+            backgroundColor: 'rgba(147, 51, 234, 0.25)',
+            borderColor: 'rgba(147, 51, 234, 0.9)',
+            borderWidth: 3,
+            pointBackgroundColor: 'rgba(147, 51, 234, 1)',
+            pointRadius: 5
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              min: 0,
+              max: 4,
+              ticks: { stepSize: 1 },
+              pointLabels: {
+                font: { size: 11, family: 'Fredoka' }
+              }
+            }
+          },
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+    }
+
+    function updateRadarChart() {
+      const v1 = parseFloat(document.getElementById('slider-axis1').value);
+      const v2 = parseFloat(document.getElementById('slider-axis2').value);
+      const v3 = parseFloat(document.getElementById('slider-axis3').value);
+      const v4 = parseFloat(document.getElementById('slider-axis4').value);
+
+      document.getElementById('val-axis1').innerText = v1;
+      document.getElementById('val-axis2').innerText = v2;
+      document.getElementById('val-axis3').innerText = v3;
+      document.getElementById('val-axis4').innerText = v4;
+
+      if (dianaChartInstance) {
+        dianaChartInstance.data.datasets[0].data = [v1, v2, v3, v4];
+        dianaChartInstance.update();
+      }
+    }
+
+    function saveEvaluation() {
+      const name = document.getElementById('student-name').value.trim();
+      const studentClass = document.getElementById('student-class').value;
+      const teamName = document.getElementById('team-name').value.trim();
+      const v1 = document.getElementById('slider-axis1').value;
+      const v2 = document.getElementById('slider-axis2').value;
+      const v3 = document.getElementById('slider-axis3').value;
+      const v4 = document.getElementById('slider-axis4').value;
+      const r1 = document.getElementById('eval-reflection-1').value.trim();
+      const r2 = document.getElementById('eval-reflection-2').value.trim();
+      const r3 = document.getElementById('eval-reflection-3').value.trim();
+      const now = new Date();
+      const dateLabel = now.toLocaleDateString('ca-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }) +
+                         ' · ' + now.toLocaleTimeString('ca-ES', { hour: '2-digit', minute: '2-digit' });
+
+      sendToSheet(
+        'Avaluacio',
+        ['Data i hora', 'Nom', 'Classe', 'Equip', 'Rols', 'Temps', 'Cooperació', 'Respecte', 'Més agradat', 'Millora feta', 'Ajuda al poble'],
+        [dateLabel, name, studentClass, teamName, v1, v2, v3, v4, r1, r2, r3]
+      );
+
+      const statusEl = document.getElementById('eval-save-status');
+      statusEl.innerText = '✅ Avaluació desada.';
+      setTimeout(() => { statusEl.innerText = ''; }, 3000);
+    }
+
+    function exportSessionLogCSV() {
+      if (sessionLog.length === 0) {
+        alert('Encara no hi ha cap registre de seguiment per exportar.');
+        return;
+      }
+      const headers = ['Data i hora', 'Trimestre', 'Sessió', 'Estat', 'Anotació'];
+      const csvRows = [headers.join(';')];
+      sessionLog.forEach(entry => {
+        const row = [
+          entry.dateLabel,
+          entry.trimesterLabel,
+          entry.session,
+          entry.moodIcon,
+          '"' + (entry.note || '').replace(/"/g, '""') + '"'
+        ];
+        csvRows.push(row.join(';'));
+      });
+      const csvContent = '\uFEFF' + csvRows.join('\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'seguiment-diari-cientific.csv';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    // Default initialization
+    window.addEventListener('DOMContentLoaded', () => {
+      updateFilterVisual();
+      loadLockState();
+      loadSessionLog();
+      loadStudentName();
+    });
+  </script>
+</body>
+</html>
