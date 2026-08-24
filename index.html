@@ -132,7 +132,7 @@
           </div>
           <div>
             <label class="block font-bold mb-1 text-gray-300">Sessió actual — T2 Posidònia:</label>
-            <input type="number" id="cfg-session-t2" min="1" max="10" value="1" class="w-full p-1.5 rounded text-gray-900">
+            <input type="number" id="cfg-session-t2" min="1" max="11" value="1" class="w-full p-1.5 rounded text-gray-900">
           </div>
           <div>
             <label class="block font-bold mb-1 text-gray-300">Sessió actual — T3 Suro:</label>
@@ -695,43 +695,42 @@
         </p>
       </div>
 
-      <!-- FITXA 1: Biodiversitat Marina -->
-      <div id="t2-fitxa1" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+      <!-- SESSIÓ 1: El fons marí de Palafrugell -->
+      <div id="t2-s1" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>📌 FITXA 1: La biodiversitat de les nostres cales</span>
-          <span class="text-xs font-normal text-gray-500">Sessió 1 i 2</span>
+          <span>SESSIÓ 1: El fons marí de Palafrugell</span>
+          <span class="text-xs font-normal text-gray-500">Sessió 1</span>
         </h3>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-          <div class="space-y-2">
-            <label class="font-bold text-gray-800 block">1. Observació de la Posidònia oceanica:</label>
-            <p class="text-gray-600">És una àlga o una planta marina? Com ho sabem?</p>
-            <textarea id="t2f1-posidonia" rows="2" placeholder="És una planta marina perquè té arrels, tija, fulles, flors i fruita..." class="w-full p-2 border rounded bg-white outline-none focus:border-ocean-500"></textarea>
+        <p class="text-sm text-gray-600">
+          Avui heu vist vídeos subaquàtics de les nostres cales i heu format els equips. Per acabar, responeu entre tots:
+        </p>
 
-            <p class="text-gray-600 mt-2">Anotacions de l'observació de l'egagròpila (bola de la platja):</p>
-            <textarea id="t2f1-egagropila" rows="2" placeholder="Les boles estan fetes de les fibres de les fulles de Posidònia que el mar enrotlla..." class="w-full p-2 border rounded bg-white outline-none focus:border-ocean-500"></textarea>
-          </div>
-
-          <!-- Comparació visual -->
-          <div class="bg-ocean-50/60 p-3 rounded-xl border border-ocean-200 space-y-2">
-            <span class="font-bold text-ocean-900 block">2. Dibuix comparatiu del fons marí:</span>
-            <div class="grid grid-cols-2 gap-2 text-center text-[11px]">
-              <div class="bg-white p-2 rounded border border-emerald-300">
-                <div class="font-bold text-emerald-800 mb-1">🌿 Praderia Sana</div>
-                <div class="h-20 bg-emerald-100 rounded flex items-center justify-center text-emerald-700 text-[10px] font-semibold">
-                  Aigua clara, peixos, xarxa d'arrels.
-                </div>
-              </div>
-              <div class="bg-white p-2 rounded border border-red-300">
-                <div class="font-bold text-red-800 mb-1">⚓ Fons Destruït</div>
-                <div class="h-20 bg-amber-100 rounded flex items-center justify-center text-red-700 text-[10px] font-semibold">
-                  Sòl desnudat per àncores, aigua tèrbola.
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="bg-gray-50 p-3 rounded-xl space-y-2 text-sm">
+          <label class="font-bold text-gray-800 block">Què t'ha cridat més l'atenció del vídeo?</label>
+          <input type="text" id="t2s1-atencio" placeholder="Ex: la quantitat de peixos que hi vivien" class="w-full p-2 border rounded bg-white outline-none focus:border-ocean-500">
         </div>
-      
+
+        <div class="flex items-center gap-3 pt-2 mt-2 border-t border-gray-100">
+          <button onclick="saveFitxaAnswers('t2-s1', 'T2: Posidònia')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
+            💾 Desar aquesta fitxa
+          </button>
+          <span id="t2-s1-save-status" class="text-[11px] text-gray-500"></span>
+        </div>
+      </div>
+
+      <!-- SESSIÓ 2: El misteri de la Posidònia -->
+      <div id="t2-fitxa1" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+        <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
+          <span>SESSIÓ 2: El misteri de la Posidònia</span>
+          <span class="text-xs font-normal text-gray-500">Sessió 2</span>
+        </h3>
+
+        <div class="bg-gray-50 p-3 rounded-xl space-y-2 text-sm">
+          <label class="font-bold text-gray-800 block">Observació de la Posidonia oceanica: és una àlga o una planta marina? Com ho sabem?</label>
+          <textarea id="t2f1-posidonia" rows="2" placeholder="És una planta marina perquè té arrels, tija, fulles, flors i fruita..." class="w-full p-2 border rounded bg-white outline-none focus:border-ocean-500"></textarea>
+        </div>
+
         <div class="flex items-center gap-3 pt-2 mt-2 border-t border-gray-100">
           <button onclick="saveFitxaAnswers('t2-fitxa1', 'T2: Posidònia')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
             💾 Desar aquesta fitxa
@@ -740,74 +739,146 @@
         </div>
       </div>
 
-      <!-- FITXA 2: Programació Scratch-like Block Builder -->
-      <div id="t2-fitxa2" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+      <!-- SESSIÓ 3: Cartografia del litoral (activitat física, sense fitxa digital) -->
+      <div id="t2-s3-info" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
         <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>💻 FITXA 2: Pensament Computacional – Algorisme de Navegació</span>
-          <span class="text-xs font-normal text-gray-500">Sessió 5 i 7</span>
+          <span>SESSIÓ 3: Cartografia del litoral</span>
+          <span class="text-xs font-normal text-gray-500">Sessió 3</span>
+        </h3>
+        <p class="text-sm text-gray-600 mt-3">
+          Avui dibuixareu en gran format el mapa de la línia de costa de Palafrugell (des de Cap Roig fins a Tamariu), marcant la línia de bany i el fons marí. És una activitat 100% de dibuix en paper — no cal escriure res al diari avui.
+        </p>
+      </div>
+
+      <!-- SESSIÓ 4: Taller de ciència marina -->
+      <div id="t2-s4" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+        <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
+          <span>SESSIÓ 4: Taller de ciència marina</span>
+          <span class="text-xs font-normal text-gray-500">Sessió 4</span>
         </h3>
 
         <p class="text-sm text-gray-600">
-          Programa el comportament del robot vaixell perquè patrulli la línia de costa i emeti un avís sonor/lumínic en detectar el color verd de la Posidònia:
+          Avui heu experimentat amb la fotosíntesi/oxigen de les plantes marines i com la Posidònia frena l'energia de les onades. Per acabar, responeu:
         </p>
 
-        <div class="bg-gray-900 p-4 rounded-xl text-white space-y-3 text-sm">
-          <div class="flex items-center justify-between border-b border-gray-700 pb-2">
-            <span class="font-bold text-amber-400 font-heading">🧩 Constructor de Blocs de Programació</span>
-            <button onclick="testRobotAlgorithm()" class="bg-ocean-500 hover:bg-ocean-600 text-white font-bold px-3 py-1 rounded">
-              ▶️ Executar Simulació
-            </button>
-          </div>
-
-          <div class="space-y-2">
-            <!-- Event Start -->
-            <div class="bg-emerald-600 p-2 rounded-lg font-mono flex items-center gap-2">
-              <span>🟢 EN INICIAR:</span>
-              <span>Avançar a velocitat</span>
-              <input type="number" id="robot-speed" value="50" min="10" max="100" class="w-14 px-1 rounded text-black font-bold text-center">
-              <span>%</span>
-            </div>
-
-            <!-- Loop block -->
-            <div class="bg-amber-600/90 p-3 rounded-lg font-mono space-y-2 ml-3 border-l-4 border-amber-400">
-              <div class="font-bold">🔄 PER SEMPRE (Bucle principal):</div>
-              <div class="bg-blue-600 p-2 rounded font-mono ml-3 space-y-1">
-                <div>SI (Sensor de Color == <span class="bg-emerald-800 text-emerald-200 px-1 rounded">VERD / Posidònia</span>) LLAVORS:</div>
-                <div class="ml-4 space-y-1 text-emerald-100 text-[11px]">
-                  <div>• Aturar motors immediatament.</div>
-                  <div>• Encendre Llum LED 🔴 Vermella.</div>
-                  <div>• Emetre so d'alerta: 🔊 "Atenció! Zona protegida".</div>
-                  <div class="flex items-center gap-1">
-                    <span>• Esperar</span>
-                    <input type="number" id="robot-wait" value="3" class="w-10 px-1 rounded text-black font-bold text-center">
-                    <span>segons i girar a la dreta vers la boia.</span>
-                  </div>
-                </div>
-              </div>
-              <div class="bg-blue-800 p-1.5 rounded font-mono ml-3 text-[11px] text-blue-200">
-                SINO: Continuar avançant i encendre llum LED 🟢 Verda.
-              </div>
-            </div>
-          </div>
-
-          <div id="robot-output" class="p-2 bg-black/50 rounded font-mono text-xs text-amber-300">
-            Estat: Algorisme a punt. Prem "Executar Simulació" per provar el codi.
-          </div>
+        <div class="bg-gray-50 p-3 rounded-xl space-y-2 text-sm">
+          <label class="font-bold text-gray-800 block">Què heu observat a l'experiment?</label>
+          <input type="text" id="t2s4-observacio" placeholder="Ex: han sortit bombolles d'oxigen de la planta" class="w-full p-2 border rounded bg-white outline-none focus:border-ocean-500">
         </div>
-      
+
         <div class="flex items-center gap-3 pt-2 mt-2 border-t border-gray-100">
-          <button onclick="saveFitxaAnswers('t2-fitxa2', 'T2: Posidònia')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
+          <button onclick="saveFitxaAnswers('t2-s4', 'T2: Posidònia')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
             💾 Desar aquesta fitxa
           </button>
-          <span id="t2-fitxa2-save-status" class="text-[11px] text-gray-500"></span>
+          <span id="t2-s4-save-status" class="text-[11px] text-gray-500"></span>
         </div>
       </div>
 
-      <!-- FITXA 3: Debugging i Muntatge -->
+      <!-- SESSIÓ 5: Pensament Computacional (disseny en paper) -->
+      <div id="t2-s5" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+        <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
+          <span>SESSIÓ 5: Pensament Computacional</span>
+          <span class="text-xs font-normal text-gray-500">Sessió 5</span>
+        </h3>
+
+        <p class="text-sm text-gray-600">
+          Avui heu dissenyat en paper la seqüència d'accions (pseudocodi) del robot. Per acabar, responeu:
+        </p>
+
+        <div class="bg-gray-50 p-3 rounded-xl space-y-2 text-sm">
+          <label class="font-bold text-gray-800 block">Quan el robot detecti la Posidònia (color verd), què farà? Descriu els passos.</label>
+          <textarea id="t2s5-pseudocodi" rows="3" placeholder="Ex: 1. Atura els motors  2. Encén la llum vermella  3. Gira cap a la boia..." class="w-full p-2 border rounded bg-white outline-none focus:border-ocean-500"></textarea>
+        </div>
+
+        <div class="flex items-center gap-3 pt-2 mt-2 border-t border-gray-100">
+          <button onclick="saveFitxaAnswers('t2-s5', 'T2: Posidònia')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
+            💾 Desar aquesta fitxa
+          </button>
+          <span id="t2-s5-save-status" class="text-[11px] text-gray-500"></span>
+        </div>
+      </div>
+
+      <!-- SESSIÓ 6: Muntatge Maker del robot (activitat física, sense fitxa digital) -->
+      <div id="t2-s6-info" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+        <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
+          <span>SESSIÓ 6: Muntatge Maker del robot</span>
+          <span class="text-xs font-normal text-gray-500">Sessió 6</span>
+        </h3>
+        <p class="text-sm text-gray-600 mt-3">
+          Avui toca construir l'estructura física del vaixell/submarí sobre el xassís robòtic amb materials reutilitzats. És una activitat 100% de taller — no cal escriure res al diari avui.
+        </p>
+      </div>
+
+      <!-- SESSIÓ 7: Programació i Sensors (LEGO SPIKE Prime) -->
+      <div id="t2-s7" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+        <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
+          <span>SESSIÓ 7: Programació i Sensors</span>
+          <span class="text-xs font-normal text-gray-500">Sessió 7</span>
+        </h3>
+
+        <p class="text-sm text-gray-600">
+          Avui heu programat el robot amb blocs (LEGO SPIKE Prime) i heu calibrat el sensor de color sobre el mapa. Per acabar, responeu:
+        </p>
+
+        <div class="bg-gray-50 p-3 rounded-xl space-y-2 text-sm">
+          <label class="font-bold text-gray-800 block">Com heu calibrat el sensor de color perquè detecti la Posidònia?</label>
+          <input type="text" id="t2s7-calibratge" placeholder="Ex: hem ajustat el llindar de verd fins que el detectava bé" class="w-full p-2 border rounded bg-white outline-none focus:border-ocean-500">
+        </div>
+
+        <div class="flex items-center gap-3 pt-2 mt-2 border-t border-gray-100">
+          <button onclick="saveFitxaAnswers('t2-s7', 'T2: Posidònia')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
+            💾 Desar aquesta fitxa
+          </button>
+          <span id="t2-s7-save-status" class="text-[11px] text-gray-500"></span>
+        </div>
+      </div>
+
+      <!-- SESSIÓ 8: Maqueta interactiva (activitat física, sense fitxa digital) -->
+      <div id="t2-s8-info" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+        <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
+          <span>SESSIÓ 8: Maqueta interactiva</span>
+          <span class="text-xs font-normal text-gray-500">Sessió 8</span>
+        </h3>
+        <p class="text-sm text-gray-600 mt-3">
+          Avui toca unir totes les parts per muntar la gran maqueta litoral final, amb zones de boies i la línia de navegació. És una activitat 100% de taller — no cal escriure res al diari avui.
+        </p>
+      </div>
+
+      <!-- SESSIÓ 9: Cadena de causalitat -->
+      <div id="t2-s9" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+        <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
+          <span>SESSIÓ 9: Cadena de causalitat</span>
+          <span class="text-xs font-normal text-gray-500">Sessió 9</span>
+        </h3>
+
+        <p class="text-sm text-gray-600">
+          Registreu la cadena: Àncores → Destrucció → Erosió → Protecció amb Robòtica (ODS 14).
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+          <div class="bg-gray-50 p-3 rounded-xl space-y-2">
+            <label class="font-bold text-gray-800 block">Per què les àncores fan mal a la Posidònia?</label>
+            <input type="text" id="t2s9-causa" placeholder="Ex: arrenquen les arrels quan s'enfonsen" class="w-full p-2 border rounded bg-white outline-none focus:border-ocean-500">
+          </div>
+          <div class="bg-gray-50 p-3 rounded-xl space-y-2">
+            <label class="font-bold text-gray-800 block">Com ajuda la nostra robòtica a protegir-la?</label>
+            <input type="text" id="t2s9-solucio" placeholder="Ex: avisa els vaixells abans que ancorin allà" class="w-full p-2 border rounded bg-white outline-none focus:border-ocean-500">
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 pt-2 mt-2 border-t border-gray-100">
+          <button onclick="saveFitxaAnswers('t2-s9', 'T2: Posidònia')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
+            💾 Desar aquesta fitxa
+          </button>
+          <span id="t2-s9-save-status" class="text-[11px] text-gray-500"></span>
+        </div>
+      </div>
+
+      <!-- SESSIÓ 10: Assaig i Depuració -->
       <div id="t2-fitxa3" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>🛠️ FITXA 3: Registre de Depuració d'Errors (Debugging)</span>
-          <span class="text-xs font-normal text-gray-500">Sessió 6 i 10</span>
+          <span>SESSIÓ 10: Assaig i Depuració</span>
+          <span class="text-xs font-normal text-gray-500">Sessió 10</span>
         </h3>
 
         <div class="overflow-x-auto text-sm">
@@ -844,6 +915,30 @@
             💾 Desar aquesta fitxa
           </button>
           <span id="t2-fitxa3-save-status" class="text-[11px] text-gray-500"></span>
+        </div>
+      </div>
+
+      <!-- SESSIÓ 11: Guia Nàutica Sostenible -->
+      <div id="t2-s11" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+        <h3 class="font-bold text-ocean-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
+          <span>SESSIÓ 11: Guia Nàutica Sostenible</span>
+          <span class="text-xs font-normal text-gray-500">Sessió 11</span>
+        </h3>
+
+        <p class="text-sm text-gray-600">
+          Avui heu redactat consells i codis QR informatius per als navegants. Per acabar, responeu:
+        </p>
+
+        <div class="bg-gray-50 p-3 rounded-xl space-y-2 text-sm">
+          <label class="font-bold text-gray-800 block">Quin consell donaríeu als navegants per protegir el fons marí?</label>
+          <input type="text" id="t2s11-consell" placeholder="Ex: ancoreu només a les boies senyalitzades" class="w-full p-2 border rounded bg-white outline-none focus:border-ocean-500">
+        </div>
+
+        <div class="flex items-center gap-3 pt-2 mt-2 border-t border-gray-100">
+          <button onclick="saveFitxaAnswers('t2-s11', 'T2: Posidònia')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
+            💾 Desar aquesta fitxa
+          </button>
+          <span id="t2-s11-save-status" class="text-[11px] text-gray-500"></span>
         </div>
       </div>
     </section>
@@ -1155,9 +1250,17 @@
         { id: 't1-w7-info', session: 7, label: 'Setmana 7: Taller Maker' }
       ],
       t2: [
-        { id: 't2-fitxa1', session: 1, label: 'Fitxa 1: Biodiversitat' },
-        { id: 't2-fitxa2', session: 5, label: 'Fitxa 2: Algorisme del Robot' },
-        { id: 't2-fitxa3', session: 6, label: 'Fitxa 3: Depuració d\'Errors' }
+        { id: 't2-s1', session: 1, label: 'Sessió 1: El fons marí de Palafrugell' },
+        { id: 't2-fitxa1', session: 2, label: 'Sessió 2: El misteri de la Posidònia' },
+        { id: 't2-s3-info', session: 3, label: 'Sessió 3: Cartografia del litoral' },
+        { id: 't2-s4', session: 4, label: 'Sessió 4: Taller de ciència marina' },
+        { id: 't2-s5', session: 5, label: 'Sessió 5: Pensament Computacional' },
+        { id: 't2-s6-info', session: 6, label: 'Sessió 6: Muntatge Maker del robot' },
+        { id: 't2-s7', session: 7, label: 'Sessió 7: Programació i Sensors' },
+        { id: 't2-s8-info', session: 8, label: 'Sessió 8: Maqueta interactiva' },
+        { id: 't2-s9', session: 9, label: 'Sessió 9: Cadena de causalitat' },
+        { id: 't2-fitxa3', session: 10, label: 'Sessió 10: Assaig i Depuració' },
+        { id: 't2-s11', session: 11, label: 'Sessió 11: Guia Nàutica Sostenible' }
       ],
       t3: [
         { id: 't3-fitxa1', session: 4, label: 'Fitxa 1: Laboratori del Suro' },
@@ -1285,13 +1388,24 @@
       't1-w6': [
         { id: 't1w6-missatge', label: 'Missatge gravat a la fusta' }
       ],
-      't2-fitxa1': [
-        { id: 't2f1-posidonia', label: 'Observació Posidònia' },
-        { id: 't2f1-egagropila', label: 'Observació egagròpila' }
+      't2-s1': [
+        { id: 't2s1-atencio', label: 'Què t\'ha cridat més l\'atenció del vídeo' }
       ],
-      't2-fitxa2': [
-        { id: 'robot-speed', label: 'Velocitat del robot (%)' },
-        { id: 'robot-wait', label: 'Segons d\'espera' }
+      't2-fitxa1': [
+        { id: 't2f1-posidonia', label: 'Observació Posidònia' }
+      ],
+      't2-s4': [
+        { id: 't2s4-observacio', label: 'Observació de l\'experiment' }
+      ],
+      't2-s5': [
+        { id: 't2s5-pseudocodi', label: 'Pseudocodi: passos del robot' }
+      ],
+      't2-s7': [
+        { id: 't2s7-calibratge', label: 'Calibratge del sensor de color' }
+      ],
+      't2-s9': [
+        { id: 't2s9-causa', label: 'Per què les àncores fan mal a la Posidònia' },
+        { id: 't2s9-solucio', label: 'Com ajuda la robòtica a protegir-la' }
       ],
       't2-fitxa3': [
         { id: 't2f3-error1-que', label: 'Error 1 - Què ha passat' },
@@ -1300,6 +1414,9 @@
         { id: 't2f3-error2-que', label: 'Error 2 - Què ha passat' },
         { id: 't2f3-error2-perque', label: 'Error 2 - Per què' },
         { id: 't2f3-error2-solucio', label: 'Error 2 - Solució' }
+      ],
+      't2-s11': [
+        { id: 't2s11-consell', label: 'Consell per als navegants' }
       ],
       't3-fitxa1': [
         { id: 't3f1-flotabilitat-suro', label: 'Flotabilitat - Suro' },
@@ -1649,15 +1766,6 @@
         resultMsg.className = "text-xs font-bold text-amber-700 mt-3";
         resultMsg.innerText = "⚠️ L'aigua encara surt una mica tèrbola. Recorda posar els materials més grans (Grava) a dalt i el Cotó a baix de tot!";
       }
-    }
-
-    // ==================== T2: ROBOT ALGORITHM SIMULATOR ====================
-    function testRobotAlgorithm() {
-      const speed = document.getElementById('robot-speed').value;
-      const waitTime = document.getElementById('robot-wait').value;
-      const output = document.getElementById('robot-output');
-
-      output.innerText = `🤖 Executant... Vaixell navegant al ${speed}% de velocitat... 🟢 Detectada Posidònia! ATURAT! 🔴 Llum vermella activa. 🔊 "Atenció! Zona protegida". Esperant ${waitTime} segons... Girant vers la boia blava de fondeig segur.`;
     }
 
     // ==================== T3: SPEECH SYNTHESIS PLAYER ====================
