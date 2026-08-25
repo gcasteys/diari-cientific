@@ -132,7 +132,7 @@
           </div>
           <div>
             <label class="block font-bold mb-1 text-gray-300">Activitat actual — T1 Gavarres:</label>
-            <input type="number" id="cfg-session-t1" min="1" max="8" value="1" class="w-full p-1.5 rounded text-gray-900">
+            <input type="number" id="cfg-session-t1" min="1" max="9" value="1" class="w-full p-1.5 rounded text-gray-900">
           </div>
           <div>
             <label class="block font-bold mb-1 text-gray-300">Activitat actual — T2 Posidònia:</label>
@@ -337,11 +337,10 @@
       <div id="t1-w1" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
           <span>ACTIVITAT 1: L'incendi de les Gavarres — Causes i efectes</span>
-          <span class="text-xs font-normal text-gray-500">Sessió 1.1 i 1.2</span>
         </h3>
 
         <p class="text-sm text-gray-600">
-          Avui heu vist notícies, fotografies i mapes de l'incendi, i heu format els equips. Per acabar, responeu entre tots:
+          Avui heu vist notícies, fotografies i mapes de l'incendi. Per acabar, responeu entre tots:
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
@@ -355,6 +354,8 @@
           </div>
         </div>
 
+        <p class="text-xs text-gray-500 italic">📌 A la propera sessió formareu els equips i assignareu els rols — ompliu-ho a la pestanya "Equip".</p>
+
         <div class="flex items-center gap-3 pt-2 mt-2 border-t border-gray-100">
           <button onclick="saveFitxaAnswers('t1-w1', 'T1: Gavarres')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
             💾 Desar aquesta fitxa
@@ -367,7 +368,6 @@
       <div id="t1-w2" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
           <span>ACTIVITAT 2: El bosc de les Gavarres — Patrimoni i adaptació</span>
-          <span class="text-xs font-normal text-gray-500">Sessió 2.1 i 2.2</span>
         </h3>
 
         <p class="text-sm text-gray-600">
@@ -397,11 +397,10 @@
         </div>
       </div>
 
-      <!-- FITXA 1: Hipòtesi -->
+      <!-- ACTIVITAT 4: Hipòtesi i Experiment d'Erosió (fusionades) -->
       <div id="t1-fitxa1" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>ACTIVITAT 3: Les pluges de tardor — Plantegem la hipòtesi</span>
-          <span class="text-xs font-normal text-gray-500">Sessió 3.1</span>
+          <span>ACTIVITAT 3: Hipòtesi i experiment d'erosió</span>
         </h3>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
@@ -417,24 +416,9 @@
             <textarea id="t1-hypothesis" rows="3" placeholder="Si plou sobre sòl cremat, l'aigua arrossegarà... perquè..." class="w-full p-2 border rounded bg-white outline-none focus:border-forest-500"></textarea>
           </div>
         </div>
-      
-        <div class="flex items-center gap-3 pt-2 mt-2 border-t border-gray-100">
-          <button onclick="saveFitxaAnswers('t1-fitxa1', 'T1: Gavarres')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
-            💾 Desar aquesta fitxa
-          </button>
-          <span id="t1-fitxa1-save-status" class="text-[11px] text-gray-500"></span>
-        </div>
-      </div>
-
-      <!-- FITXA 2: Experiment d'Erosió (Canvas Simulator) -->
-      <div id="t1-fitxa2" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
-        <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>ACTIVITAT 4: Les pluges de tardor — Registrem l'experiment</span>
-          <span class="text-xs font-normal text-gray-500">Sessió 3.2</span>
-        </h3>
 
         <p class="text-sm text-gray-600">
-          Feu l'experiment amb les ampolles tallades (sòl amb vegetació, sòl nu i sòl cremat) i anoteu aquí el que observeu:
+          Ara feu l'experiment amb les ampolles tallades (sòl amb vegetació, sòl nu i sòl cremat) i anoteu aquí el que observeu:
         </p>
 
         <!-- Data Registration Table -->
@@ -472,191 +456,63 @@
         </div>
       
         <div class="flex items-center gap-3 pt-2 mt-2 border-t border-gray-100">
-          <button onclick="saveFitxaAnswers('t1-fitxa2', 'T1: Gavarres')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
+          <button onclick="saveFitxaAnswers('t1-fitxa1', 'T1: Gavarres')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
             💾 Desar aquesta fitxa
           </button>
-          <span id="t1-fitxa2-save-status" class="text-[11px] text-gray-500"></span>
+          <span id="t1-fitxa1-save-status" class="text-[11px] text-gray-500"></span>
         </div>
       </div>
 
-      <!-- SETMANA 4: Disseny del Filtre (planificació) -->
-      <div id="t1-w4" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+      <!-- ACTIVITAT 5: Regeneració natural -->
+      <div id="t1-a5-regen" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>ACTIVITAT 5: Pensament de disseny — Com netegem l'aigua de la riera?</span>
-          <span class="text-xs font-normal text-gray-500">Sessió 4.1 i 4.2</span>
-        </h3>
-
-        <div class="bg-gray-50 p-3 rounded-xl space-y-2 text-sm">
-          <label class="font-bold text-gray-800 block">Per què cal filtrar l'aigua abans que torni al medi?</label>
-          <input type="text" id="t1w4-perque" placeholder="Ex: perquè la cendra fa mal als animals i plantes" class="w-full p-2 border rounded bg-white outline-none focus:border-forest-500">
-        </div>
-
-        <div class="bg-forest-50/60 p-3 rounded-xl border border-forest-200 space-y-2 text-sm">
-          <p class="font-bold text-forest-900">📝 Disseny previst: en quin ordre posareu els materials? (encara no el construïm, només el planifiquem)</p>
-          <div class="grid grid-cols-1 sm:grid-cols-5 gap-2">
-            <div>
-              <label class="block text-gray-600 mb-1">Capa 1 (Dalt)</label>
-              <select id="t1w4-capa-1" class="w-full border p-1.5 rounded bg-white">
-                <option value="Grava">Grava</option>
-                <option value="Sorra Gruixuda">Sorra Gruixuda</option>
-                <option value="Sorra Fina">Sorra Fina</option>
-                <option value="Carbó Actiu">Carbó Actiu</option>
-                <option value="Cotó">Cotó</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-gray-600 mb-1">Capa 2</label>
-              <select id="t1w4-capa-2" class="w-full border p-1.5 rounded bg-white">
-                <option value="Sorra Gruixuda">Sorra Gruixuda</option>
-                <option value="Grava">Grava</option>
-                <option value="Sorra Fina">Sorra Fina</option>
-                <option value="Carbó Actiu">Carbó Actiu</option>
-                <option value="Cotó">Cotó</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-gray-600 mb-1">Capa 3</label>
-              <select id="t1w4-capa-3" class="w-full border p-1.5 rounded bg-white">
-                <option value="Sorra Fina">Sorra Fina</option>
-                <option value="Grava">Grava</option>
-                <option value="Sorra Gruixuda">Sorra Gruixuda</option>
-                <option value="Carbó Actiu">Carbó Actiu</option>
-                <option value="Cotó">Cotó</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-gray-600 mb-1">Capa 4</label>
-              <select id="t1w4-capa-4" class="w-full border p-1.5 rounded bg-white">
-                <option value="Carbó Actiu">Carbó Actiu</option>
-                <option value="Grava">Grava</option>
-                <option value="Sorra Gruixuda">Sorra Gruixuda</option>
-                <option value="Sorra Fina">Sorra Fina</option>
-                <option value="Cotó">Cotó</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-gray-600 mb-1">Capa 5 (Baix)</label>
-              <select id="t1w4-capa-5" class="w-full border p-1.5 rounded bg-white">
-                <option value="Cotó">Cotó</option>
-                <option value="Grava">Grava</option>
-                <option value="Sorra Gruixuda">Sorra Gruixuda</option>
-                <option value="Carbó Actiu">Carbó Actiu</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-3 pt-2 mt-2 border-t border-gray-100">
-          <button onclick="saveFitxaAnswers('t1-w4', 'T1: Gavarres')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
-            💾 Desar aquesta fitxa
-          </button>
-          <span id="t1-w4-save-status" class="text-[11px] text-gray-500"></span>
-        </div>
-      </div>
-
-      <!-- FITXA 3: Taller Maker Filtre d'Aigua -->
-      <div id="t1-fitxa3" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
-        <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>ACTIVITAT 6: Taller d'enginyeria — Construcció i prova del filtre</span>
-          <span class="text-xs font-normal text-gray-500">Sessió 5.1 i 5.2</span>
+          <span>ACTIVITAT 4: Com renaix el bosc</span>
         </h3>
 
         <p class="text-sm text-gray-600">
-          Ordena les capes de materials filtrants de dalt a baix per netejar l'aigua tèrbola amb cendra:
+          Avui heu après com algunes plantes es regeneren després d'un incendi (el pi obre les pinyes amb la calor, l'alzina surera rebrota gràcies a la seva escorça) i què passa si el foc es repeteix massa sovint. Per acabar, responeu:
         </p>
 
-        <!-- Builder Interactive UI -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-          <!-- Layer selector -->
-          <div class="space-y-2 bg-gray-50 p-3 rounded-xl text-sm">
-            <p class="font-bold text-gray-800">Selecciona el material per a cada capa (De dalt a baix):</p>
-            <div class="space-y-1.5">
-              <div class="flex items-center justify-between gap-2">
-                <span class="font-bold text-gray-600">Capa 1 (Dalt):</span>
-                <select id="layer-1" onchange="updateFilterVisual()" class="border p-1 rounded bg-white w-40">
-                  <option value="Grava">Grava (Pedres grans)</option>
-                  <option value="Sorra Gruixuda">Sorra Gruixuda</option>
-                  <option value="Sorra Fina">Sorra Fina</option>
-                  <option value="Carbó Actiu">Carbó Actiu</option>
-                  <option value="Cotó">Cotó</option>
-                </select>
-              </div>
-              <div class="flex items-center justify-between gap-2">
-                <span class="font-bold text-gray-600">Capa 2:</span>
-                <select id="layer-2" onchange="updateFilterVisual()" class="border p-1 rounded bg-white w-40">
-                  <option value="Sorra Gruixuda" selected>Sorra Gruixuda</option>
-                  <option value="Grava">Grava</option>
-                  <option value="Sorra Fina">Sorra Fina</option>
-                  <option value="Carbó Actiu">Carbó Actiu</option>
-                  <option value="Cotó">Cotó</option>
-                </select>
-              </div>
-              <div class="flex items-center justify-between gap-2">
-                <span class="font-bold text-gray-600">Capa 3:</span>
-                <select id="layer-3" onchange="updateFilterVisual()" class="border p-1 rounded bg-white w-40">
-                  <option value="Sorra Fina" selected>Sorra Fina</option>
-                  <option value="Grava">Grava</option>
-                  <option value="Sorra Gruixuda">Sorra Gruixuda</option>
-                  <option value="Carbó Actiu">Carbó Actiu</option>
-                  <option value="Cotó">Cotó</option>
-                </select>
-              </div>
-              <div class="flex items-center justify-between gap-2">
-                <span class="font-bold text-gray-600">Capa 4:</span>
-                <select id="layer-4" onchange="updateFilterVisual()" class="border p-1 rounded bg-white w-40">
-                  <option value="Carbó Actiu" selected>Carbó Actiu</option>
-                  <option value="Grava">Grava</option>
-                  <option value="Sorra Gruixuda">Sorra Gruixuda</option>
-                  <option value="Sorra Fina">Sorra Fina</option>
-                  <option value="Cotó">Cotó</option>
-                </select>
-              </div>
-              <div class="flex items-center justify-between gap-2">
-                <span class="font-bold text-gray-600">Capa 5 (Baix):</span>
-                <select id="layer-5" onchange="updateFilterVisual()" class="border p-1 rounded bg-white w-40">
-                  <option value="Cotó" selected>Cotó (Filtre fi)</option>
-                  <option value="Grava">Grava</option>
-                  <option value="Sorra Gruixuda">Sorra Gruixuda</option>
-                  <option value="Carbó Actiu">Carbó Actiu</option>
-                </select>
-              </div>
-            </div>
-
-            <button onclick="testWaterFilter()" class="w-full mt-2 bg-forest-500 hover:bg-forest-600 text-white font-bold py-1.5 rounded transition-all">
-              💧 Provar Filtratge d'Aigua
-            </button>
-          </div>
-
-          <!-- Graphic representation -->
-          <div class="bg-forest-50/50 p-4 rounded-xl border border-forest-200 text-center flex flex-col items-center">
-            <div class="text-sm font-bold text-gray-700 mb-2">Esquema del Prototip del Filtre</div>
-            <div class="w-36 bg-gray-200 rounded-t-lg border-2 border-gray-400 overflow-hidden flex flex-col shadow-inner">
-              <div id="vis-layer-1" class="h-6 bg-stone-300 text-[10px] flex items-center justify-center font-bold text-gray-700">Grava</div>
-              <div id="vis-layer-2" class="h-6 bg-amber-200 text-[10px] flex items-center justify-center font-bold text-gray-800">Sorra G.</div>
-              <div id="vis-layer-3" class="h-6 bg-amber-100 text-[10px] flex items-center justify-center font-bold text-gray-800">Sorra F.</div>
-              <div id="vis-layer-4" class="h-6 bg-gray-800 text-[10px] flex items-center justify-center font-bold text-white">Carbó</div>
-              <div id="vis-layer-5" class="h-6 bg-white text-[10px] flex items-center justify-center font-bold text-gray-600">Cotó</div>
-            </div>
-            <div class="w-12 h-6 border-x-2 border-b-2 border-gray-400 bg-blue-100/40 rounded-b-md"></div>
-            <div id="filter-result-msg" class="text-xs font-bold text-forest-700 mt-3">
-              Prem "Provar Filtratge" per veure la claredat de l'aigua.
-            </div>
-          </div>
+        <div class="bg-gray-50 p-3 rounded-xl space-y-2 text-sm">
+          <label class="font-bold text-gray-800 block">Quina planta es regenera bé després d'un incendi, i com ho fa?</label>
+          <input type="text" id="t1a5-regeneracio" placeholder="Ex: l'alzina surera, gràcies a la seva escorça gruixuda" class="w-full p-2 border rounded bg-white outline-none focus:border-forest-500">
         </div>
-      
+
         <div class="flex items-center gap-3 pt-2 mt-2 border-t border-gray-100">
-          <button onclick="saveFitxaAnswers('t1-fitxa3', 'T1: Gavarres')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
+          <button onclick="saveFitxaAnswers('t1-a5-regen', 'T1: Gavarres')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
             💾 Desar aquesta fitxa
           </button>
-          <span id="t1-fitxa3-save-status" class="text-[11px] text-gray-500"></span>
+          <span id="t1-a5-regen-save-status" class="text-[11px] text-gray-500"></span>
         </div>
       </div>
 
-      <!-- SETMANA 6: Senyal per a la Talladora Làser -->
+      <!-- ACTIVITAT 6: Bombers i prevenció -->
+      <div id="t1-a6-bombers" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+        <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
+          <span>ACTIVITAT 5: La feina dels bombers</span>
+        </h3>
+
+        <p class="text-sm text-gray-600">
+          Avui heu conegut la feina dels bombers: prevenció, equipament i actuació en un incendi forestal. Per acabar, responeu:
+        </p>
+
+        <div class="bg-gray-50 p-3 rounded-xl space-y-2 text-sm">
+          <label class="font-bold text-gray-800 block">Quina tasca dels bombers t'ha semblat més important?</label>
+          <input type="text" id="t1a6-bombers" placeholder="Ex: vigilar i avisar abans que l'incendi es faci gran" class="w-full p-2 border rounded bg-white outline-none focus:border-forest-500">
+        </div>
+
+        <div class="flex items-center gap-3 pt-2 mt-2 border-t border-gray-100">
+          <button onclick="saveFitxaAnswers('t1-a6-bombers', 'T1: Gavarres')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
+            💾 Desar aquesta fitxa
+          </button>
+          <span id="t1-a6-bombers-save-status" class="text-[11px] text-gray-500"></span>
+        </div>
+      </div>
+
+                  <!-- SETMANA 6: Senyal per a la Talladora Làser -->
       <div id="t1-w6" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>ACTIVITAT 7: Fabricació digital — Disseny del senyal per a la Talladora Làser</span>
-          <span class="text-xs font-normal text-gray-500">Sessió 6.1 i 6.2</span>
+          <span>ACTIVITAT 6: Redacció del missatge de sensibilització</span>
         </h3>
 
         <p class="text-sm text-gray-600">
@@ -676,14 +532,46 @@
         </div>
       </div>
 
+      <!-- ACTIVITAT 8: Disseny vectorial digital (CAD 2D) -->
+      <div id="t1-w8-cad" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+        <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
+          <span>ACTIVITAT 7: Disseny vectorial digital (CAD 2D)</span>
+        </h3>
+
+        <p class="text-sm text-gray-600">
+          Avui heu digitalitzat el vostre missatge i iconografia amb tauletes/portàtils, adaptant el format i el traç per a la talladora làser. Per acabar, responeu:
+        </p>
+
+        <div class="bg-gray-50 p-3 rounded-xl space-y-2 text-sm">
+          <label class="font-bold text-gray-800 block">Quina icona o dibuix heu triat per acompanyar el missatge?</label>
+          <input type="text" id="t1w8-icona" placeholder="Ex: un arbre amb una gota d'aigua" class="w-full p-2 border rounded bg-white outline-none focus:border-forest-500">
+        </div>
+
+        <div class="flex items-center gap-3 pt-2 mt-2 border-t border-gray-100">
+          <button onclick="saveFitxaAnswers('t1-w8-cad', 'T1: Gavarres')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
+            💾 Desar aquesta fitxa
+          </button>
+          <span id="t1-w8-cad-save-status" class="text-[11px] text-gray-500"></span>
+        </div>
+      </div>
+
       <!-- SETMANA 7: Taller Maker (activitat física, sense fitxa digital) -->
       <div id="t1-w7-info" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
           <span>ACTIVITAT 8: Taller Maker — Tallat i gravat en fusta</span>
-          <span class="text-xs font-normal text-gray-500">Sessió 7.1 i 7.2</span>
         </h3>
         <p class="text-sm text-gray-600 mt-3">
           Avui toca posar-se les ulleres de protecció! Gravareu i tallareu en directe els senyals que vau dissenyar la setmana passada, i acabareu la feina polint la fusta i aplicant-hi el protector. És una activitat 100% de taller — no cal escriure res al diari avui, només retrata bé el resultat per ensenyar-lo al Congrés de la setmana vinent!
+        </p>
+      </div>
+
+      <!-- ACTIVITAT 9: Congrés i Avaluació (recordatori) -->
+      <div id="t1-w9-eval-info" class="lockable relative bg-purple-50 p-5 rounded-2xl border border-purple-200 shadow-sm">
+        <h3 class="font-bold text-purple-800 font-heading text-lg border-b border-purple-200 pb-2 flex items-center justify-between">
+          <span>ACTIVITAT 9: Congrés "Cuidem les Gavarres" i Avaluació</span>
+        </h3>
+        <p class="text-sm text-gray-700 mt-3">
+          Ja heu arribat al final del trimestre! Avui exposeu el senyal de fusta a la resta de la classe. Per tancar el trimestre, aneu a la pestanya <strong>"Avalua't"</strong> i ompliu la Diana de Coavaluació de l'equip i la vostra reflexió personal.
         </p>
       </div>
     </section>
@@ -1247,14 +1135,15 @@
     // Configuració de quina sessió desbloqueja cada fitxa dins de cada trimestre
     const LOCK_CONFIG = {
       t1: [
-        { id: 't1-w1', session: 1, label: 'Activitat 1: Anàlisi de l\'incendi' },
+        { id: 't1-w1', session: 1, label: 'Activitat 1: L\'incendi de les Gavarres' },
         { id: 't1-w2', session: 2, label: 'Activitat 2: El bosc de les Gavarres' },
-        { id: 't1-fitxa1', session: 3, label: 'Activitat 3: Hipòtesi' },
-        { id: 't1-fitxa2', session: 4, label: 'Activitat 4: Simulador d\'Erosió' },
-        { id: 't1-w4', session: 5, label: 'Activitat 5: Disseny del Filtre' },
-        { id: 't1-fitxa3', session: 6, label: 'Activitat 6: Construcció i Prova del Filtre' },
-        { id: 't1-w6', session: 7, label: 'Activitat 7: Senyal per a la Làser' },
-        { id: 't1-w7-info', session: 8, label: 'Activitat 8: Taller Maker' }
+        { id: 't1-fitxa1', session: 3, label: 'Activitat 3: Hipòtesi i experiment d\'erosió' },
+        { id: 't1-a5-regen', session: 4, label: 'Activitat 4: Com renaix el bosc' },
+        { id: 't1-a6-bombers', session: 5, label: 'Activitat 5: La feina dels bombers' },
+        { id: 't1-w6', session: 6, label: 'Activitat 6: Redacció del missatge' },
+        { id: 't1-w8-cad', session: 7, label: 'Activitat 7: Disseny vectorial (CAD 2D)' },
+        { id: 't1-w7-info', session: 8, label: 'Activitat 8: Taller Maker' },
+        { id: 't1-w9-eval-info', session: 9, label: 'Activitat 9: Congrés i Avaluació' }
       ],
       t2: [
         { id: 't2-s1', session: 1, label: 'Sessió 1: El fons marí de Palafrugell' },
@@ -1364,9 +1253,7 @@
       ],
       't1-fitxa1': [
         { id: 't1-q1', label: 'Observacions prèvies' },
-        { id: 't1-hypothesis', label: 'Hipòtesi d\'equip' }
-      ],
-      't1-fitxa2': [
+        { id: 't1-hypothesis', label: 'Hipòtesi d\'equip' },
         { id: 't1f2-a-aigua', label: 'Sòl A (vegetació) - Aigua (ml)' },
         { id: 't1f2-a-aspecte', label: 'Sòl A (vegetació) - Aspecte' },
         { id: 't1f2-a-terra', label: 'Sòl A (vegetació) - Terra arrossegada' },
@@ -1377,23 +1264,17 @@
         { id: 't1f2-c-aspecte', label: 'Sòl C (cremat) - Aspecte' },
         { id: 't1f2-c-terra', label: 'Sòl C (cremat) - Terra arrossegada' }
       ],
-      't1-w4': [
-        { id: 't1w4-perque', label: 'Per què cal filtrar l\'aigua?' },
-        { id: 't1w4-capa-1', label: 'Disseny previst - Capa 1 (Dalt)' },
-        { id: 't1w4-capa-2', label: 'Disseny previst - Capa 2' },
-        { id: 't1w4-capa-3', label: 'Disseny previst - Capa 3' },
-        { id: 't1w4-capa-4', label: 'Disseny previst - Capa 4' },
-        { id: 't1w4-capa-5', label: 'Disseny previst - Capa 5 (Baix)' }
+      't1-a5-regen': [
+        { id: 't1a5-regeneracio', label: 'Com es regenera una planta després d\'un incendi' }
       ],
-      't1-fitxa3': [
-        { id: 'layer-1', label: 'Filtre - Capa 1 (Dalt)' },
-        { id: 'layer-2', label: 'Filtre - Capa 2' },
-        { id: 'layer-3', label: 'Filtre - Capa 3' },
-        { id: 'layer-4', label: 'Filtre - Capa 4' },
-        { id: 'layer-5', label: 'Filtre - Capa 5 (Baix)' }
+      't1-a6-bombers': [
+        { id: 't1a6-bombers', label: 'Tasca dels bombers més important' }
       ],
       't1-w6': [
         { id: 't1w6-missatge', label: 'Missatge gravat a la fusta' }
+      ],
+      't1-w8-cad': [
+        { id: 't1w8-icona', label: 'Icona o dibuix triat' }
       ],
       't2-s1': [
         { id: 't2s1-atencio', label: 'Què t\'ha cridat més l\'atenció del vídeo' }
@@ -1741,40 +1622,6 @@
       feedback.innerHTML = roleMissions[roleKey] || '';
     }
 
-    // Filter UI sync
-    function updateFilterVisual() {
-      const colors = {
-        'Grava': { bg: 'bg-stone-300', text: 'text-gray-800' },
-        'Sorra Gruixuda': { bg: 'bg-amber-200', text: 'text-amber-900' },
-        'Sorra Fina': { bg: 'bg-amber-100', text: 'text-amber-900' },
-        'Carbó Actiu': { bg: 'bg-gray-800', text: 'text-white' },
-        'Cotó': { bg: 'bg-white', text: 'text-gray-600' }
-      };
-
-      for (let i = 1; i <= 5; i++) {
-        const val = document.getElementById('layer-' + i).value;
-        const layerEl = document.getElementById('vis-layer-' + i);
-        if (layerEl) {
-          layerEl.className = `h-6 ${colors[val].bg} ${colors[val].text} text-[10px] flex items-center justify-center font-bold`;
-          layerEl.innerText = val;
-        }
-      }
-    }
-
-    function testWaterFilter() {
-      const l1 = document.getElementById('layer-1').value;
-      const l5 = document.getElementById('layer-5').value;
-      const resultMsg = document.getElementById('filter-result-msg');
-
-      if (l1 === 'Grava' && l5 === 'Cotó') {
-        resultMsg.className = "text-xs font-bold text-forest-700 mt-3";
-        resultMsg.innerText = "✨ Felicitats! L'ordre és correcte. L'aigua tèrbola surt cristal·lina!";
-      } else {
-        resultMsg.className = "text-xs font-bold text-amber-700 mt-3";
-        resultMsg.innerText = "⚠️ L'aigua encara surt una mica tèrbola. Recorda posar els materials més grans (Grava) a dalt i el Cotó a baix de tot!";
-      }
-    }
-
     // ==================== T3: SPEECH SYNTHESIS PLAYER ====================
     function playAudioGuideScript() {
       const title = document.getElementById('script-title').value;
@@ -1940,7 +1787,6 @@
 
     // Default initialization
     window.addEventListener('DOMContentLoaded', () => {
-      updateFilterVisual();
       loadLockState();
       loadSessionLog();
       loadStudentName();
