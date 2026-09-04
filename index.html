@@ -132,7 +132,7 @@
           </div>
           <div>
             <label class="block font-bold mb-1 text-gray-300">Activitat actual — T1 Gavarres:</label>
-            <input type="number" id="cfg-session-t1" min="1" max="12" value="1" class="w-full p-1.5 rounded text-gray-900">
+            <input type="number" id="cfg-session-t1" min="1" max="10" value="1" class="w-full p-1.5 rounded text-gray-900">
           </div>
           <div>
             <label class="block font-bold mb-1 text-gray-300">Activitat actual — T2 Posidònia:</label>
@@ -333,45 +333,10 @@
         </p>
       </div>
 
-      <!-- ACTIVITAT 1: Què en sabem sobre els incendis? -->
-      <div id="t1-w1" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
-        <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>ACTIVITAT 1: Què en sabem sobre els incendis?</span>
-          <span class="text-xs font-normal text-gray-500">Sessió 1.1</span>
-        </h3>
-
-        <p class="text-sm text-gray-600">
-          Avui heu vist un vídeo sobre l'incendi de les Gavarres i heu fet una pluja d'idees. Per acabar, responeu:
-        </p>
-
-        <div class="bg-gray-50 p-3 rounded-xl space-y-2 text-sm">
-          <label class="font-bold text-gray-800 block">Escriu una cosa que ja sabies (o has après avui) sobre els incendis forestals</label>
-          <input type="text" id="t1w1-idea" placeholder="Ex: la majoria d'incendis els provoca l'activitat humana" class="w-full p-2 border rounded bg-white outline-none focus:border-forest-500">
-        </div>
-
-        <div class="flex items-center gap-3 pt-2 mt-2 border-t border-gray-100">
-          <button onclick="saveFitxaAnswers('t1-w1', 'T1: Gavarres')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
-            💾 Desar aquesta fitxa
-          </button>
-          <span id="t1-w1-save-status" class="text-[11px] text-gray-500"></span>
-        </div>
-      </div>
-
-      <!-- ACTIVITAT 2: Concurs de preguntes (activitat oral, sense fitxa digital) -->
-      <div id="t1-w1b-info" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
-        <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>ACTIVITAT 2: Concurs de preguntes sobre incendis</span>
-          <span class="text-xs font-normal text-gray-500">Sessió 1.2</span>
-        </h3>
-        <p class="text-sm text-gray-600 mt-3">
-          Avui juguem a un concurs amb pissarretes: el/la mestre/a fa preguntes sobre incendis forestals i cada equip respon per escrit. És una activitat oral i de pissarra — no cal escriure res al diari avui.
-        </p>
-      </div>
-
       <!-- ACTIVITAT 3: Lectura sobre l'incendi de les Gavarres -->
       <div id="t1-lectura" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>ACTIVITAT 3: Lectura sobre l'incendi de les Gavarres</span>
+          <span>ACTIVITAT 1: Lectura sobre l'incendi de les Gavarres</span>
           <span class="text-xs font-normal text-gray-500">Sessió 2.2</span>
         </h3>
 
@@ -401,7 +366,7 @@
       <!-- ACTIVITAT 4: Descoberta d'espècies -->
       <div id="t1-w3a" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>ACTIVITAT 4: Descoberta d'espècies de les Gavarres</span>
+          <span>ACTIVITAT 2: Descoberta d'espècies de les Gavarres</span>
           <span class="text-xs font-normal text-gray-500">Sessió 3.1</span>
         </h3>
 
@@ -425,7 +390,7 @@
       <!-- ACTIVITAT 5: Com ha canviat l'ecosistema -->
       <div id="t1-w3b" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>ACTIVITAT 5: Com ha canviat l'ecosistema</span>
+          <span>ACTIVITAT 3: Com ha canviat l'ecosistema</span>
           <span class="text-xs font-normal text-gray-500">Sessió 3.2</span>
         </h3>
 
@@ -449,7 +414,7 @@
       <!-- ACTIVITAT 6: Com renaix el bosc -->
       <div id="t1-w4-regen" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>ACTIVITAT 6: Com renaix el bosc</span>
+          <span>ACTIVITAT 4: Com renaix el bosc</span>
           <span class="text-xs font-normal text-gray-500">Sessió 4.2</span>
         </h3>
 
@@ -473,7 +438,7 @@
       <!-- ACTIVITAT 7: Preparem la visita d'experts -->
       <div id="t1-w5-experts" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>ACTIVITAT 7: Preparem la visita d'experts</span>
+          <span>ACTIVITAT 5: Preparem la visita d'experts</span>
           <span class="text-xs font-normal text-gray-500">Sessió 5.1 i 5.2</span>
         </h3>
 
@@ -497,7 +462,7 @@
       <!-- ACTIVITAT 8: La visita d'experts -->
       <div id="t1-w6-visita" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>ACTIVITAT 8: La visita d'experts</span>
+          <span>ACTIVITAT 6: La visita d'experts</span>
           <span class="text-xs font-normal text-gray-500">Sessió 6.1</span>
         </h3>
 
@@ -521,7 +486,7 @@
       <!-- ACTIVITAT 9: Tasques de prevenció -->
       <div id="t1-w6-prevencio" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>ACTIVITAT 9: Tasques de prevenció</span>
+          <span>ACTIVITAT 7: Tasques de prevenció</span>
           <span class="text-xs font-normal text-gray-500">Sessió 6.2</span>
         </h3>
 
@@ -545,7 +510,7 @@
       <!-- ACTIVITAT 10: El nostre missatge -->
       <div id="t1-w7-missatge" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>ACTIVITAT 10: El nostre missatge de sensibilització</span>
+          <span>ACTIVITAT 8: El nostre missatge de sensibilització</span>
           <span class="text-xs font-normal text-gray-500">Sessió 7.1</span>
         </h3>
 
@@ -569,7 +534,7 @@
       <!-- ACTIVITAT 11: Disseny amb ordinador -->
       <div id="t1-w7-disseny" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>ACTIVITAT 11: Disseny del missatge amb l'ordinador</span>
+          <span>ACTIVITAT 9: Disseny del missatge amb l'ordinador</span>
           <span class="text-xs font-normal text-gray-500">Sessió 7.2</span>
         </h3>
 
@@ -593,7 +558,7 @@
       <!-- ACTIVITAT 12: Preparem l'exposició (activitat pràctica, sense fitxa digital) -->
       <div id="t1-w8-info" class="lockable relative bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
         <h3 class="font-bold text-forest-700 font-heading text-lg border-b pb-2 flex items-center justify-between">
-          <span>ACTIVITAT 12: Preparem l'exposició</span>
+          <span>ACTIVITAT 10: Preparem l'exposició</span>
           <span class="text-xs font-normal text-gray-500">Sessió 8.2</span>
         </h3>
         <p class="text-sm text-gray-600 mt-3">
@@ -1160,18 +1125,16 @@
     // Configuració de quina sessió desbloqueja cada fitxa dins de cada trimestre
     const LOCK_CONFIG = {
       t1: [
-        { id: 't1-w1', session: 1, label: 'Activitat 1: Què en sabem sobre els incendis?' },
-        { id: 't1-w1b-info', session: 2, label: 'Activitat 2: Concurs de preguntes' },
-        { id: 't1-lectura', session: 3, label: 'Activitat 3: Lectura sobre l\'incendi' },
-        { id: 't1-w3a', session: 4, label: 'Activitat 4: Descoberta d\'espècies' },
-        { id: 't1-w3b', session: 5, label: 'Activitat 5: Com ha canviat l\'ecosistema' },
-        { id: 't1-w4-regen', session: 6, label: 'Activitat 6: Com renaix el bosc' },
-        { id: 't1-w5-experts', session: 7, label: 'Activitat 7: Preparem la visita d\'experts' },
-        { id: 't1-w6-visita', session: 8, label: 'Activitat 8: La visita d\'experts' },
-        { id: 't1-w6-prevencio', session: 9, label: 'Activitat 9: Tasques de prevenció' },
-        { id: 't1-w7-missatge', session: 10, label: 'Activitat 10: El nostre missatge' },
-        { id: 't1-w7-disseny', session: 11, label: 'Activitat 11: Disseny amb ordinador' },
-        { id: 't1-w8-info', session: 12, label: 'Activitat 12: Preparem l\'exposició' }
+        { id: 't1-lectura', session: 1, label: 'Activitat 1: Lectura sobre l\'incendi' },
+        { id: 't1-w3a', session: 2, label: 'Activitat 2: Descoberta d\'espècies' },
+        { id: 't1-w3b', session: 3, label: 'Activitat 3: Com ha canviat l\'ecosistema' },
+        { id: 't1-w4-regen', session: 4, label: 'Activitat 4: Com renaix el bosc' },
+        { id: 't1-w5-experts', session: 5, label: 'Activitat 5: Preparem la visita d\'experts' },
+        { id: 't1-w6-visita', session: 6, label: 'Activitat 6: La visita d\'experts' },
+        { id: 't1-w6-prevencio', session: 7, label: 'Activitat 7: Tasques de prevenció' },
+        { id: 't1-w7-missatge', session: 8, label: 'Activitat 8: El nostre missatge' },
+        { id: 't1-w7-disseny', session: 9, label: 'Activitat 9: Disseny amb ordinador' },
+        { id: 't1-w8-info', session: 10, label: 'Activitat 10: Preparem l\'exposició' }
       ],
       t2: [
         { id: 't2-s1', session: 1, label: 'Sessió 1: El fons marí de Palafrugell' },
@@ -1271,9 +1234,6 @@
     // ==================== RESPOSTES DE LES FITXES (per alumne i sessió) ====================
     // Per a cada fitxa, quins camps cal recollir i quina etiqueta (Camp) ha de sortir al full
     const FITXA_FIELDS = {
-      't1-w1': [
-        { id: 't1w1-idea', label: 'Idea sobre els incendis' }
-      ],
       't1-lectura': [
         { id: 't1lectura-causa', label: 'Causa principal de l\'incendi' },
         { id: 't1lectura-efecte', label: 'Efecte més important' }
